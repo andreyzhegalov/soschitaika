@@ -1,11 +1,11 @@
 package zhegalov.course.work.service;
 
+import zhegalov.course.work.model.Question;
+
 public class QuestionGeneratorServiceImpl implements QuestionGeneratorService {
 
     @Override
-    public Object create() {
-        // TODO Auto-generated method stub
-        return null;
+    public Question create() {
+        return new Question();
     }
-
 }
