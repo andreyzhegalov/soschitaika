@@ -4,9 +4,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
 
-import zhegalov.course.work.model.Expression;
-import zhegalov.course.work.model.ExpressionOperation;
 import zhegalov.course.work.model.GeneratorSetup;
+import zhegalov.course.work.model.expression.Expression;
+import zhegalov.course.work.model.expression.ExpressionOperation;
 
 public class ExpressionGeneratorServiceTest {
 
@@ -20,5 +20,7 @@ public class ExpressionGeneratorServiceTest {
 
         final var expression = generator.create(generatorSetup);
         assertThat(expression).isNotNull().isInstanceOf(Expression.class);
+        assertThat(expression.getValues()).hasSize(2);
+        assertThat(expression.getValues()).allMatch(v -> v == 1);
     }
 }

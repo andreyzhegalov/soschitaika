@@ -17,9 +17,9 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import zhegalov.course.work.model.AddExpression;
-import zhegalov.course.work.model.ExpressionOperation;
 import zhegalov.course.work.model.GeneratorSetup;
+import zhegalov.course.work.model.expression.AddExpression;
+import zhegalov.course.work.model.expression.ExpressionOperation;
 import zhegalov.course.work.service.ExpressionGeneratorService;
 
 @WebMvcTest(controllers = ExpressionController.class)
