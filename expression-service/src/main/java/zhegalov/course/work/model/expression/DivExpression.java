@@ -13,4 +13,14 @@ public class DivExpression extends Expression {
         return "/";
     }
 
+    @Override
+    public Integer getResult() {
+        final var iterator = getValues().iterator();
+        Integer result = iterator.next();
+        while (iterator.hasNext()) {
+            result /= iterator.next();
+        }
+        return result;
+    }
+
 }

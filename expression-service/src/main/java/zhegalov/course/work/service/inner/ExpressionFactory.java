@@ -2,7 +2,7 @@ package zhegalov.course.work.service.inner;
 
 import java.util.List;
 
-import zhegalov.course.work.model.expression.AddExpression;
+import zhegalov.course.work.model.expression.SumExpression;
 import zhegalov.course.work.model.expression.DivExpression;
 import zhegalov.course.work.model.expression.Expression;
 import zhegalov.course.work.model.expression.ExpressionOperation;
@@ -15,7 +15,7 @@ public class ExpressionFactory {
     public static Expression create(ExpressionOperation operationType, List<Integer> values) {
         switch (operationType) {
             case SUM:
-                return new AddExpression(values);
+                return new SumExpression(values);
             case SUB:
                 return new SubExpression(values);
             case MUL:

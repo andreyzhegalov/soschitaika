@@ -13,5 +13,6 @@ public abstract class Expression {
     }
 
     public abstract String getOperation();
-}
 
+    public abstract Integer getResult();
+}

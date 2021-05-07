@@ -20,7 +20,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import zhegalov.course.work.model.GeneratorSetup;
-import zhegalov.course.work.model.expression.AddExpression;
+import zhegalov.course.work.model.expression.SumExpression;
 import zhegalov.course.work.model.expression.ExpressionOperation;
 import zhegalov.course.work.service.ExpressionGeneratorService;
 
@@ -42,7 +42,7 @@ public class ExpressionControllerTest {
         final var mapper = new ObjectMapper();
         final var jsonString = mapper.writeValueAsString(generatorSetup);
 
-        given(expressionGeneratorService.create(any())).willReturn(new AddExpression(Collections.emptyList()));
+        given(expressionGeneratorService.create(any())).willReturn(new SumExpression(Collections.emptyList()));
 
         mvc.perform( post("/api/expressions")
                 .content(jsonString)

@@ -22,6 +22,7 @@ public class ExpressionGeneratorServiceImplTest {
 
         assertThat(expression).isNotNull().isInstanceOf(Expression.class);
         assertThat(expression.getValues()).hasSize(2);
+        assertThat(expression.getResult()).isEqualTo(2);
         assertThat(expression.getValues()).allMatch(v -> v == 1);
     }
 }
