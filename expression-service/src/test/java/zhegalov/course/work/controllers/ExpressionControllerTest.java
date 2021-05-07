@@ -53,4 +53,3 @@ public class ExpressionControllerTest {
         then(expressionGeneratorService).should().createExpressionDto(any());
     }
 }
-

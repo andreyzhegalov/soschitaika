@@ -5,13 +5,19 @@ import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import org.springframework.stereotype.Service;
+
+import lombok.RequiredArgsConstructor;
 import zhegalov.course.work.controllers.dto.ExpressionDto;
 import zhegalov.course.work.model.GeneratorSetup;
 import zhegalov.course.work.model.expression.Expression;
 import zhegalov.course.work.model.expression.ExpressionOperation;
 import zhegalov.course.work.service.inner.ExpressionFactory;
 
+@RequiredArgsConstructor
+@Service
 public class ExpressionGeneratorServiceImpl implements ExpressionGeneratorService {
+    private final ExpressionPrintService printService;
 
     @Override
     public Expression create(GeneratorSetup generatorSetup) {
@@ -40,7 +46,7 @@ public class ExpressionGeneratorServiceImpl implements ExpressionGeneratorServic
     public ExpressionDto createExpressionDto(GeneratorSetup generatorSetup) {
         final var expressionDto = new ExpressionDto();
         final var expression = create(generatorSetup);
-        expressionDto.setExpression(new ExpressionPrintServiceImpl().print(expression));
+        expressionDto.setExpression(printService.print(expression));
         expressionDto.setResult(expression.getResult());
         return expressionDto;
     }
