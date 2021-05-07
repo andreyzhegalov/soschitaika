@@ -30,3 +30,7 @@ hs_err_pid*
 **/.factorypath
 **/.settings/*
 **/target/*
+.idea/*
+**/*.iml
+stale_outputs_checked
+

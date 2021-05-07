@@ -29,7 +29,7 @@
     </parent>
 
     <modules>
-        <module>questions-service</module>
+        <module>expression-service</module>
     </modules>
 
     <build>

@@ -28,7 +28,7 @@ public class ExpressionControllerTest {
     private MockMvc mvc;
 
     @MockBean
-    private ExpressionGeneratorService questionGeneratorService;
+    private ExpressionGeneratorService expressionGeneratorService;
 
     @Test
     void shouldCreateNewQuestion() throws Exception{
@@ -40,7 +40,7 @@ public class ExpressionControllerTest {
         final var mapper = new ObjectMapper();
         final var jsonString = mapper.writeValueAsString(generatorSetup);
 
-        given(questionGeneratorService.create(any())).willReturn(new AddExpression());
+        given(expressionGeneratorService.create(any())).willReturn(new AddExpression());
 
         mvc.perform( post("/api/expressions")
                 .content(jsonString)
@@ -49,7 +49,7 @@ public class ExpressionControllerTest {
                 .andExpect(status()
                 .isCreated());
 
-        then(questionGeneratorService).should().create(any());
+        then(expressionGeneratorService).should().create(any());
     }
 }
 
