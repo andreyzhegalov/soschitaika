@@ -25,4 +25,18 @@ public class ExpressionGeneratorServiceImplTest {
         assertThat(expression.getResult()).isEqualTo(2);
         assertThat(expression.getValues()).allMatch(v -> v == 1);
     }
+
+    @Test
+    void shouldCreateExpressionDto(){
+        final var generatorSetup = new GeneratorSetup();
+        generatorSetup.setOperations(ExpressionOperation.SUM);
+        generatorSetup.setMin(1);
+        generatorSetup.setMax(1);
+
+        final var generator = new ExpressionGeneratorServiceImpl();
+        final var expressionDto = generator.createExpressionDto(generatorSetup);
+        assertThat(expressionDto).isNotNull();
+        assertThat(expressionDto.getExpression()).isEqualTo("1+1");
+        assertThat(expressionDto.getResult()).isEqualTo(1+1);
+    }
 }

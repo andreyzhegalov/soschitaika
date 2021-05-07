@@ -7,8 +7,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import java.util.Collections;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.junit.jupiter.api.Test;
@@ -19,8 +17,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
+import zhegalov.course.work.controllers.dto.ExpressionDto;
 import zhegalov.course.work.model.GeneratorSetup;
-import zhegalov.course.work.model.expression.SumExpression;
 import zhegalov.course.work.model.expression.ExpressionOperation;
 import zhegalov.course.work.service.ExpressionGeneratorService;
 
@@ -42,7 +40,8 @@ public class ExpressionControllerTest {
         final var mapper = new ObjectMapper();
         final var jsonString = mapper.writeValueAsString(generatorSetup);
 
-        given(expressionGeneratorService.create(any())).willReturn(new SumExpression(Collections.emptyList()));
+        given(expressionGeneratorService.createExpressionDto(any())).
+            willReturn(new ExpressionDto());
 
         mvc.perform( post("/api/expressions")
                 .content(jsonString)
@@ -51,7 +50,7 @@ public class ExpressionControllerTest {
                 .andExpect(status()
                 .isCreated());
 
-        then(expressionGeneratorService).should().create(any());
+        then(expressionGeneratorService).should().createExpressionDto(any());
     }
 }
 

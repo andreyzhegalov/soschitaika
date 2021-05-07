@@ -5,6 +5,7 @@ import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import zhegalov.course.work.controllers.dto.ExpressionDto;
 import zhegalov.course.work.model.GeneratorSetup;
 import zhegalov.course.work.model.expression.Expression;
 import zhegalov.course.work.model.expression.ExpressionOperation;
@@ -33,5 +34,14 @@ public class ExpressionGeneratorServiceImpl implements ExpressionGeneratorServic
         final var bound = max - min;
         final var randInBound = (bound > 0) ? random.nextInt(bound) : 0;
         return min + randInBound;
+    }
+
+    @Override
+    public ExpressionDto createExpressionDto(GeneratorSetup generatorSetup) {
+        final var expressionDto = new ExpressionDto();
+        final var expression = create(generatorSetup);
+        expressionDto.setExpression(new ExpressionPrintServiceImpl().print(expression));
+        expressionDto.setResult(expression.getResult());
+        return expressionDto;
     }
 }

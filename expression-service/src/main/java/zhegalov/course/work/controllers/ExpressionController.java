@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
+import zhegalov.course.work.controllers.dto.ExpressionDto;
 import zhegalov.course.work.model.GeneratorSetup;
-import zhegalov.course.work.model.expression.Expression;
 import zhegalov.course.work.service.ExpressionGeneratorService;
 
 @RequiredArgsConstructor
@@ -19,8 +19,8 @@ public class ExpressionController {
 
     @PostMapping(path = "/api/expressions")
     @ResponseStatus(HttpStatus.CREATED)
-    public Expression createExpression(@RequestBody GeneratorSetup generatorSetup){
-        return expressionGeneratorService.create(generatorSetup);
+    public ExpressionDto createExpression(@RequestBody GeneratorSetup generatorSetup){
+        return expressionGeneratorService.createExpressionDto(generatorSetup);
     }
 }
 
