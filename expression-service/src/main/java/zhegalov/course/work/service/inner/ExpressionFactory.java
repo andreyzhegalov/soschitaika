@@ -22,7 +22,6 @@ public class ExpressionFactory {
                 return new MulExpression(values);
             case DIV:
                 return new DivExpression(values);
-
             default:
                 throw new ExpressionServiceException("operation not defined");
         }

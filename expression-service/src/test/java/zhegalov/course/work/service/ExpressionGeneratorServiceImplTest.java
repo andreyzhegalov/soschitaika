@@ -8,7 +8,7 @@ import zhegalov.course.work.model.GeneratorSetup;
 import zhegalov.course.work.model.expression.Expression;
 import zhegalov.course.work.model.expression.ExpressionOperation;
 
-public class ExpressionGeneratorServiceTest {
+public class ExpressionGeneratorServiceImplTest {
 
     @Test
     void shouldGenerateExpressionByConfig() {
