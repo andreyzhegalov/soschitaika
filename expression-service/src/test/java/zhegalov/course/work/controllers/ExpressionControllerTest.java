@@ -7,6 +7,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.util.Collections;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.junit.jupiter.api.Test;
@@ -40,7 +42,7 @@ public class ExpressionControllerTest {
         final var mapper = new ObjectMapper();
         final var jsonString = mapper.writeValueAsString(generatorSetup);
 
-        given(expressionGeneratorService.create(any())).willReturn(new AddExpression());
+        given(expressionGeneratorService.create(any())).willReturn(new AddExpression(Collections.emptyList()));
 
         mvc.perform( post("/api/expressions")
                 .content(jsonString)

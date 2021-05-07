@@ -15,13 +15,14 @@ public class ExpressionGeneratorServiceImpl implements ExpressionGeneratorServic
         final var random = new Random();
         final var operationList = generatorSetup.getOperations();
         final var currentOperation = operationList.get(random.nextInt(operationList.size()));
+
         final var values = IntStream.range(0, generatorSetup.getValueCnt()).boxed()
                 .map(unused -> getRandom(generatorSetup.getMin(), generatorSetup.getMax()))
                 .collect(Collectors.toList());
 
         switch (currentOperation) {
         case SUM:
-            return new AddExpression(values.toArray(new Integer[0]));
+            return new AddExpression(values);
 
         default:
             throw new RuntimeException();

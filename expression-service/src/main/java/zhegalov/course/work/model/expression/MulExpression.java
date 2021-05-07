@@ -2,14 +2,16 @@ package zhegalov.course.work.model.expression;
 
 import java.util.List;
 
-public class AddExpression extends Expression {
+public class MulExpression extends Expression{
 
-    public AddExpression(List<Integer> values) {
+    public MulExpression(List<Integer> values) {
         super(values);
     }
 
     @Override
     public String getOperation() {
-        return "+";
+        return "*";
     }
+
 }
+

@@ -8,8 +8,8 @@ import lombok.Data;
 public abstract class Expression {
     private final List<Integer> values;
 
-    protected Expression(Integer ... values) {
-        this.values = List.of(values);
+    protected Expression(List<Integer> values) {
+        this.values = values;
     }
 
     public abstract String getOperation();

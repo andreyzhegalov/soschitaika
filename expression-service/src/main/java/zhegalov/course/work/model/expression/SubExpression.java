@@ -1,8 +1,9 @@
 package zhegalov.course.work.model.expression;
 
-public class SubExpression extends Expression {
+import java.util.List;
 
-    public SubExpression(Integer... values) {
+public class SubExpression extends Expression {
+    public SubExpression(List<Integer> values) {
         super(values);
     }
 
