@@ -11,14 +11,15 @@ import zhegalov.course.work.model.expression.ExpressionOperation;
 public class ExpressionGeneratorServiceTest {
 
     @Test
-    void shouldGenerateSumExpression() {
-        final var generator = new ExpressionGeneratorServiceImpl();
+    void shouldGenerateExpressionByConfig() {
         final var generatorSetup = new GeneratorSetup();
         generatorSetup.setOperations(ExpressionOperation.SUM);
         generatorSetup.setMin(1);
         generatorSetup.setMax(1);
 
+        final var generator = new ExpressionGeneratorServiceImpl();
         final var expression = generator.create(generatorSetup);
+
         assertThat(expression).isNotNull().isInstanceOf(Expression.class);
         assertThat(expression.getValues()).hasSize(2);
         assertThat(expression.getValues()).allMatch(v -> v == 1);

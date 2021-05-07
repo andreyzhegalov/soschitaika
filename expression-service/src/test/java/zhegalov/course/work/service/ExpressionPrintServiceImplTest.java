@@ -17,7 +17,7 @@ public class ExpressionPrintServiceImplTest {
 
     @Test
     void shouldPrintSubExpression() {
-        final var expression = new SubExpression(1, 2, 3);
-        assertThat(new ExpressionPrintServiceImpl().print(expression)).isEqualTo("1-2-3");
+        final var expression = new SubExpression(3, 2, 1);
+        assertThat(new ExpressionPrintServiceImpl().print(expression)).isEqualTo("3-2-1");
     }
 }
