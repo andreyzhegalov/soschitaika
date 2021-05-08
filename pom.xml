@@ -30,6 +30,7 @@
 
     <modules>
         <module>expression-service</module>
+        <module>game-session-service</module>
     </modules>
 
     <build>
