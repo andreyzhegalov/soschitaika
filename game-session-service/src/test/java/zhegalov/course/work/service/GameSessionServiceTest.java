@@ -1,12 +1,11 @@
 package zhegalov.course.work.service;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.then;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +38,24 @@ public class GameSessionServiceTest {
         final var newSession = sessionService.create(new GameSettings());
 
         then(sessionRepository).should().save(any());
-
         assertThat(newSession).isNotNull();
+    }
+
+    @Test
+    void shouldReturnGameSession() {
+        String sessionId = "123";
+        given(sessionRepository.findById(sessionId)).willReturn(Optional.of(new GameSession()));
+
+        final var gameSession = sessionService.getGameSession(sessionId);
+
+        then(sessionRepository).should().findById(sessionId);
+        assertThat(gameSession).isNotEmpty();
+    }
+
+    @Test
+    void shouldReturnNewQuestionIfSessionNotCompleted() {
+        GameSession gameSession = new GameSession();
+        final var question = sessionService.getQuestion(gameSession);
+        assertThat(question).isNotNull();
     }
 }
