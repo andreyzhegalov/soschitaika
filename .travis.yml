@@ -5,7 +5,7 @@ jdk:
 install: skip
 
 script:
-  - mvn test -B |grep ERROR
+  - mvn test -B
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
