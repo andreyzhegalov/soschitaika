@@ -3,6 +3,11 @@ server:
   error:
     include-stacktrace: always
 
+spring:
+  data:
+    mongodb:
+      database: soschitaika
+      uri: mongodb://localhost
 
 management:
   endpoints:

@@ -1,6 +1,16 @@
 package zhegalov.course.work.model;
 
-public class GameSession {
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@Document("gameSession")
+public class GameSession {
+    @Id
+    private String id;
 }
 
