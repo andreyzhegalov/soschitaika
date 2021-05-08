@@ -31,7 +31,7 @@ public class ExpressionControllerTest {
     private ExpressionGeneratorService expressionGeneratorService;
 
     @Test
-    void shouldCreateNewQuestion() throws Exception{
+    void shouldCreateNewQuestion() throws Exception {
         final var generatorSetup = new GeneratorSetup();
         generatorSetup.setMin(0);
         generatorSetup.setMax(1);
@@ -40,15 +40,10 @@ public class ExpressionControllerTest {
         final var mapper = new ObjectMapper();
         final var jsonString = mapper.writeValueAsString(generatorSetup);
 
-        given(expressionGeneratorService.createExpressionDto(any())).
-            willReturn(new ExpressionDto());
+        given(expressionGeneratorService.createExpressionDto(any())).willReturn(new ExpressionDto());
 
-        mvc.perform( post("/api/expressions")
-                .content(jsonString)
-                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON))
-                .andDo(print())
-                .andExpect(status()
-                .isCreated());
+        mvc.perform(post("/api/expressions").content(jsonString).header(HttpHeaders.CONTENT_TYPE,
+                MediaType.APPLICATION_JSON)).andDo(print()).andExpect(status().isCreated());
 
         then(expressionGeneratorService).should().createExpressionDto(any());
     }
