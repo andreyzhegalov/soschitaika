@@ -12,6 +12,8 @@ public interface GameSessionService {
 
     Optional<GameSession> getGameSession(String id);
 
+    boolean isSessionComplete(GameSession gameSession);
+
     //TODO replace to question service
     Question getQuestion(GameSession gameSession);
 }

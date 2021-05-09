@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 public class GameSession {
     @Id
     private String id;
+
     private GameSettings gameSettings;
 }
 
