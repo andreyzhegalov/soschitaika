@@ -9,10 +9,11 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import zhegalov.course.work.feign.dto.ExpressionDto;
 import zhegalov.course.work.feign.dto.GeneratorSetup;
 
-@FeignClient(name = "currency-conversion")
+@FeignClient(name = "currency-conversion", url = "http://192.168.1.139:8101")
 public interface ExpressionServiceProxy {
 
     @PostMapping(path = "/api/expressions")
     @ResponseStatus(HttpStatus.CREATED)
     public ExpressionDto createExpression(@RequestBody GeneratorSetup generatorSetup);
+
 }

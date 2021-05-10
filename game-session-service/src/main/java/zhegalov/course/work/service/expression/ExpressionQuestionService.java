@@ -2,6 +2,7 @@ package zhegalov.course.work.service.expression;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
@@ -17,7 +18,8 @@ import zhegalov.course.work.service.expression.convertors.GameSettingsConvertor;
 @RequiredArgsConstructor
 @Service
 public class ExpressionQuestionService implements QuestionService {
-    private final ExpressionServiceProxy expressionServiceProxy;
+    @Autowired
+    private ExpressionServiceProxy expressionServiceProxy;
     private final QuestionRepository questionRepository;
 
     @Override
