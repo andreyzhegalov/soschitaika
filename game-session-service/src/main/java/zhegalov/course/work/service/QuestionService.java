@@ -7,6 +7,8 @@ import zhegalov.course.work.model.Question;
 
 public interface QuestionService {
 
+    Question createQuestion(GameSession session);
+
     List<Question> getQuestions(GameSession session);
 
 }

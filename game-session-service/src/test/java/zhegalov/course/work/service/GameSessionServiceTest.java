@@ -8,7 +8,6 @@ import static org.mockito.BDDMockito.then;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Optional;
-import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -94,10 +93,4 @@ public class GameSessionServiceTest {
         then(questionService).should().getQuestions(any());
     }
 
-    @Test
-    void shouldReturnNewQuestionIfSessionNotCompleted() {
-        GameSession gameSession = new GameSession();
-        final var question = sessionService.getQuestion(gameSession);
-        assertThat(question).isNotNull();
-    }
 }
