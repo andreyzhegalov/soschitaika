@@ -9,6 +9,8 @@ public interface QuestionService {
 
     Question createQuestion(GameSession session);
 
+    Question saveQuestion(Question question);
+
     List<Question> getQuestions(GameSession session);
 
 }
