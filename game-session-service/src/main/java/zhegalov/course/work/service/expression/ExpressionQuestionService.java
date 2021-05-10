@@ -1,4 +1,4 @@
-package zhegalov.course.work.service;
+package zhegalov.course.work.service.expression;
 
 import java.util.List;
 
@@ -10,10 +10,12 @@ import zhegalov.course.work.feign.dto.ExpressionDto;
 import zhegalov.course.work.feign.dto.GeneratorSetup;
 import zhegalov.course.work.model.GameSession;
 import zhegalov.course.work.model.Question;
+import zhegalov.course.work.model.gamesettings.ExpressionGameSettings;
+import zhegalov.course.work.service.QuestionService;
 
 @RequiredArgsConstructor
 @Service
-public class QuestionServiceImpl implements QuestionService {
+public class ExpressionQuestionService implements QuestionService {
     private final ExpressionServiceProxy expressionServiceProxy;
 
     @Override
@@ -24,7 +26,15 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     private GeneratorSetup createGeneratorSetup(GameSession gameSession) {
-        return null;
+        final var gameSettings = (ExpressionGameSettings) gameSession.getGameSettings();
+        final var generatorSetup = new GeneratorSetup();
+        generatorSetup.setMax(gameSettings.getMax());
+        generatorSetup.setMin(gameSettings.getMin());
+        generatorSetup.setValueCnt(gameSettings.getValueCnt());
+        // final var operations = gameSettings.getOperations().stream().map(o -> (ExpressionOperation) o)
+        //         .collect(Collectors.toList());
+        // generatorSetup.setOperations(gameSettings.getOperations());
+        return generatorSetup;
     }
 
     private Question createQuestion(ExpressionDto expression) {
