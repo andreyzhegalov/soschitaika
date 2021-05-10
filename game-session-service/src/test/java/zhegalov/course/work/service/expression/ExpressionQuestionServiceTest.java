@@ -48,10 +48,13 @@ public class ExpressionQuestionServiceTest {
         final var gameSession = new GameSession();
         gameSession.setGameSettings(gameSettings);
 
-        given(expressionService.createExpression(any())).willReturn(new ExpressionDto());
+        final var expression = new ExpressionDto();
+        expression.setExpression("1+1");
+        given(expressionService.createExpression(any())).willReturn(expression);
 
         final var questions = questionService.createQuestion(gameSession);
         assertThat(questions).isNotNull();
+        assertThat(questions.getText()).isEqualTo(expression.getExpression());
 
         then(expressionService).should().createExpression(any());
     }

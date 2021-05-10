@@ -7,11 +7,10 @@ import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
 import zhegalov.course.work.feign.ExpressionServiceProxy;
 import zhegalov.course.work.feign.dto.ExpressionDto;
-import zhegalov.course.work.feign.dto.GeneratorSetup;
 import zhegalov.course.work.model.GameSession;
 import zhegalov.course.work.model.Question;
-import zhegalov.course.work.model.gamesettings.ExpressionGameSettings;
 import zhegalov.course.work.service.QuestionService;
+import zhegalov.course.work.service.expression.convertors.GameSettingsConvertor;
 
 @RequiredArgsConstructor
 @Service
@@ -20,25 +19,15 @@ public class ExpressionQuestionService implements QuestionService {
 
     @Override
     public Question createQuestion(GameSession session) {
-        final var generatorSetup = createGeneratorSetup(session);
+        final var generatorSetup = GameSettingsConvertor.convertGameSettings(session.getGameSettings());
         final var expression = expressionServiceProxy.createExpression(generatorSetup);
         return createQuestion(expression);
     }
 
-    private GeneratorSetup createGeneratorSetup(GameSession gameSession) {
-        final var gameSettings = (ExpressionGameSettings) gameSession.getGameSettings();
-        final var generatorSetup = new GeneratorSetup();
-        generatorSetup.setMax(gameSettings.getMax());
-        generatorSetup.setMin(gameSettings.getMin());
-        generatorSetup.setValueCnt(gameSettings.getValueCnt());
-        // final var operations = gameSettings.getOperations().stream().map(o -> (ExpressionOperation) o)
-        //         .collect(Collectors.toList());
-        // generatorSetup.setOperations(gameSettings.getOperations());
-        return generatorSetup;
-    }
-
     private Question createQuestion(ExpressionDto expression) {
-        return null;
+        final var question =  new Question();
+        question.setText(expression.getExpression());
+        return question;
     }
 
     @Override
