@@ -14,6 +14,6 @@ public class ExpressionGameSettings extends GameSettings{
     private Integer min;
     private Integer max;
     private Integer valueCnt = 2;
-    private List<ExpressionOperation> operations;
+    private List<ExpressionOperationV0> operations;
 }
 

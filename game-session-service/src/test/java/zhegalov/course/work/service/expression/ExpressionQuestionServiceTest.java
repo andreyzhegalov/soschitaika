@@ -18,7 +18,7 @@ import zhegalov.course.work.feign.ExpressionServiceProxy;
 import zhegalov.course.work.feign.dto.ExpressionDto;
 import zhegalov.course.work.model.GameSession;
 import zhegalov.course.work.model.gamesettings.ExpressionGameSettings;
-import zhegalov.course.work.model.gamesettings.ExpressionOperation;
+import zhegalov.course.work.model.gamesettings.ExpressionOperationV0;
 import zhegalov.course.work.respositories.QuestionRepository;
 import zhegalov.course.work.service.QuestionService;
 
@@ -44,7 +44,7 @@ public class ExpressionQuestionServiceTest {
         gameSettings.setMax(10);
         gameSettings.setMax(1);
         gameSettings.setValueCnt(2);
-        gameSettings.setOperations(List.of(ExpressionOperation.MUL));
+        gameSettings.setOperations(List.of(ExpressionOperationV0.MUL));
         final var gameSession = new GameSession();
         gameSession.setGameSettings(gameSettings);
 

@@ -18,8 +18,8 @@ import org.springframework.context.annotation.Import;
 
 import zhegalov.course.work.model.Answer;
 import zhegalov.course.work.model.GameSession;
-import zhegalov.course.work.model.GameSettings;
 import zhegalov.course.work.model.Question;
+import zhegalov.course.work.model.gamesettings.ExpressionGameSettings;
 import zhegalov.course.work.respositories.GameSessionRepository;
 
 @SpringBootTest
@@ -42,7 +42,7 @@ public class GameSessionServiceTest {
     void shouldCreateNewGameSessionBySettings() {
         given(sessionRepository.save(any())).willReturn(new GameSession());
 
-        final var newSession = sessionService.create(new GameSettings());
+        final var newSession = sessionService.create(new ExpressionGameSettings());
 
         then(sessionRepository).should().save(any());
         assertThat(newSession).isNotNull();
