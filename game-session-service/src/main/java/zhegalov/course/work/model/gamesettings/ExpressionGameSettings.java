@@ -13,7 +13,7 @@ import zhegalov.course.work.model.GameSettings;
 public class ExpressionGameSettings extends GameSettings{
     private Integer min;
     private Integer max;
-    private Integer valueCnt = 2;
+    private Integer valueCnt;
     private List<ExpressionOperationV0> operations;
 }
 

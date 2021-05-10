@@ -16,7 +16,6 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
-import zhegalov.course.work.model.Answer;
 import zhegalov.course.work.model.GameSession;
 import zhegalov.course.work.model.Question;
 import zhegalov.course.work.model.gamesettings.ExpressionGameSettings;
@@ -72,7 +71,7 @@ public class GameSessionServiceTest {
     @Test
     void shouldReturnCompletedSessionIfAllQuestionWithAnswerFounded() {
         final var questionsWithAnswer = Arrays.asList(new Question(), new Question());
-        questionsWithAnswer.forEach(q -> q.setAnswer(new Answer()));
+        questionsWithAnswer.forEach(q -> q.setAnswer(""));
         final var gameSession = new GameSession();
         given(questionService.getQuestions(gameSession)).willReturn(questionsWithAnswer);
 
@@ -84,7 +83,7 @@ public class GameSessionServiceTest {
     @Test
     void shouldReturnNotCompletedSessionIfSomeQuestionHasNotAnswer() {
         final var questionsWithAnswer = Arrays.asList(new Question(), new Question());
-        questionsWithAnswer.get(0).setAnswer(new Answer());
+        questionsWithAnswer.get(0).setAnswer("");
         final var gameSession = new GameSession();
         given(questionService.getQuestions(gameSession)).willReturn(questionsWithAnswer);
 

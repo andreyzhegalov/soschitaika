@@ -17,7 +17,6 @@ import org.springframework.context.annotation.Import;
 
 import zhegalov.course.work.feign.ExpressionServiceProxy;
 import zhegalov.course.work.feign.dto.ExpressionDto;
-import zhegalov.course.work.model.Answer;
 import zhegalov.course.work.model.GameSession;
 import zhegalov.course.work.model.Question;
 import zhegalov.course.work.model.gamesettings.ExpressionGameSettings;
@@ -51,7 +50,7 @@ public class ExpressionQuestionServiceTest {
         final var gameSession = new GameSession();
         gameSession.setGameSettings(gameSettings);
         final var sessionId = "sessionId";
-		gameSession.setId(sessionId);
+        gameSession.setId(sessionId);
 
         final var expression = new ExpressionDto();
         expression.setExpression("1+1");
@@ -63,7 +62,7 @@ public class ExpressionQuestionServiceTest {
 
         assertThat(questions).isNotNull();
         assertThat(questions.getText()).isEqualTo(expression.getExpression());
-        assertThat(questions.getAnswer()).isEqualTo(new Answer("2"));
+        assertThat(questions.getCorrectAnswer()).isEqualTo("2");
         assertThat(questions.getSessionId()).isEqualTo(sessionId);
         then(expressionService).should().createExpression(any());
     }
@@ -75,12 +74,12 @@ public class ExpressionQuestionServiceTest {
     }
 
     @Test
-    void shouldGetAllSessionQuestions(){
+    void shouldGetAllSessionQuestions() {
         GameSession session = new GameSession();
         final var sessionId = "123";
-		session.setId(sessionId);
+        session.setId(sessionId);
 
-		questionService.getQuestions(session);
+        questionService.getQuestions(session);
 
         then(questionRepository).should().findBySessionId(eq(sessionId));
     }
