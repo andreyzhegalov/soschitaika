@@ -1,5 +1,5 @@
 package zhegalov.course.work.service;
- 
+
 import java.util.Objects;
 import java.util.Optional;
 
@@ -18,7 +18,9 @@ public class GameSessionServiceImpl implements GameSessionService {
 
     @Override
     public GameSession create(GameSettings gameSettings) {
-        return gameSessionRepository.save(new GameSession());
+        final var gameSession = new GameSession();
+        gameSession.setGameSettings(gameSettings);
+        return gameSessionRepository.save(gameSession);
     }
 
     @Override
@@ -29,7 +31,7 @@ public class GameSessionServiceImpl implements GameSessionService {
     @Override
     public boolean isSessionComplete(GameSession gameSession) {
         final var questions = questionService.getQuestions(gameSession);
-        if(questions.isEmpty()){
+        if (questions.isEmpty()) {
             return false;
         }
         return questions.stream().filter(q -> Objects.isNull(q.getAnswer())).count() == 0;
