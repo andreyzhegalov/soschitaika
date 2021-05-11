@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
-import zhegalov.course.work.model.GameSession;
+import zhegalov.course.work.controllers.dto.SessionDto;
 import zhegalov.course.work.model.gamesettings.ExpressionGameSettings;
 import zhegalov.course.work.service.GameSessionService;
 
@@ -18,8 +18,8 @@ public class GameSessionController {
 
     @PostMapping(path = "/api/sessions")
     @ResponseStatus(HttpStatus.CREATED)
-    GameSession saveNewSession(@RequestBody ExpressionGameSettings body){
-        return sessionService.create(body);
+    SessionDto saveNewSession(@RequestBody ExpressionGameSettings body){
+        return new SessionDto( sessionService.create(body) );
     }
 }
 
