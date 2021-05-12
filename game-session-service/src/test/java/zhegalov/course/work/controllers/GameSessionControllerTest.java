@@ -39,15 +39,20 @@ public class GameSessionControllerTest {
         generatorSetup.setMax(1);
         generatorSetup.setValueCnt(5);
         generatorSetup.setOperations(List.of(ExpressionOperationV0.SUM));
-        final var mapper = new ObjectMapper();
-        final var jsonString = mapper.writeValueAsString(generatorSetup);
+        final var gameSession = new GameSession();
+        gameSession.setQuestionCount(2);
+        gameSession.setGameSettings(generatorSetup);
 
-        given(sessionService.create(any())).willReturn(new GameSession());
+        final var mapper = new ObjectMapper();
+        final var jsonString = mapper.writeValueAsString(gameSession);
+
+        gameSession.setId("some id");
+        given(sessionService.save(any())).willReturn(gameSession);
 
         mvc.perform(
                 post("/api/sessions").content(jsonString).header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON))
                 .andDo(print()).andExpect(status().isCreated());
 
-        then(sessionService).should().create(any());
+        then(sessionService).should().save(any());
     }
 }

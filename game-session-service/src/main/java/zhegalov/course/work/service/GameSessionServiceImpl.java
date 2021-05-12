@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import zhegalov.course.work.model.GameSession;
-import zhegalov.course.work.model.GameSettings;
 import zhegalov.course.work.respositories.GameSessionRepository;
 
 @Slf4j
@@ -19,9 +18,7 @@ public class GameSessionServiceImpl implements GameSessionService {
     private final QuestionService questionService;
 
     @Override
-    public GameSession create(GameSettings gameSettings) {
-        final var gameSession = new GameSession();
-        gameSession.setGameSettings(gameSettings);
+    public GameSession save(GameSession gameSession) {
         return gameSessionRepository.save(gameSession);
     }
 

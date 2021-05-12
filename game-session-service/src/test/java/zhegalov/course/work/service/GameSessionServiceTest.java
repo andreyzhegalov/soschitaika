@@ -19,7 +19,6 @@ import org.springframework.context.annotation.Import;
 
 import zhegalov.course.work.model.GameSession;
 import zhegalov.course.work.model.Question;
-import zhegalov.course.work.model.gamesettings.ExpressionGameSettings;
 import zhegalov.course.work.respositories.GameSessionRepository;
 
 @SpringBootTest
@@ -42,7 +41,7 @@ public class GameSessionServiceTest {
     void shouldCreateNewGameSessionBySettings() {
         given(sessionRepository.save(any())).willReturn(new GameSession());
 
-        final var newSession = sessionService.create(new ExpressionGameSettings());
+        final var newSession = sessionService.save(new GameSession());
 
         then(sessionRepository).should().save(any());
         assertThat(newSession).isNotNull();
@@ -84,7 +83,7 @@ public class GameSessionServiceTest {
     }
 
     @Test
-    void souldRuturnNotCompletedSessionIfNotAllQuestionWithAnswerFounded() {
+    void souldReturnNotCompletedSessionIfNotAllQuestionWithAnswerFounded() {
         final var gameSession = new GameSession();
         gameSession.setQuestionCount(3);
         given(questionService.getQuestions(gameSession)).willReturn(makeQuestionsWithAnswer());

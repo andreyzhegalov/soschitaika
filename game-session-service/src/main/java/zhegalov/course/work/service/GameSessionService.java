@@ -3,11 +3,10 @@ package zhegalov.course.work.service;
 import java.util.Optional;
 
 import zhegalov.course.work.model.GameSession;
-import zhegalov.course.work.model.GameSettings;
 
 public interface GameSessionService {
 
-    GameSession create(GameSettings gameSettings);
+    GameSession save(GameSession gameSession);
 
     Optional<GameSession> getGameSession(String id);
 
