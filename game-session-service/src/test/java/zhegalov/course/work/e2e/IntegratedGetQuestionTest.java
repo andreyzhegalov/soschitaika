@@ -16,7 +16,6 @@ import org.springframework.boot.autoconfigure.mongo.embedded.EmbeddedMongoAutoCo
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Configuration;
 
-@Disabled
 @SpringBootTest
 @EnableAutoConfiguration(exclude = { EmbeddedMongoAutoConfiguration.class, MongoAutoConfiguration.class })
 public class IntegratedGetQuestionTest {
@@ -30,6 +29,7 @@ public class IntegratedGetQuestionTest {
     @Test
     void getQuestionScenario() throws Exception {
         final var jsonSettings = "{\"min\":0,\"max\":10,\"valueCnt\":2,\"operations\":[\"SUM\"]}";
+
         final var httpPostSession = new HttpPost(gameSessionServerAddress + "/api/sessions");
         httpPostSession.setEntity(new StringEntity(jsonSettings));
         httpPostSession.setHeader("Accept", "application/json");
