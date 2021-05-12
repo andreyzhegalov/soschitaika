@@ -10,5 +10,6 @@ spring:
 
 logging:
   level:
-    ROOT: DEBUG
-    org.springframework: DEBUG
+    ROOT: INFO
+    org.springframework: INFO
+    zhegalov.course.work: INFO

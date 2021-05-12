@@ -13,6 +13,8 @@ public class GameSession {
     @Id
     private String id;
 
+    private Integer questionCount;
+
     private GameSettings gameSettings;
 }
 

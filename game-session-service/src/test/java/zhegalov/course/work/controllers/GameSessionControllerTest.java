@@ -2,6 +2,7 @@ package zhegalov.course.work.controllers;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.then;
+import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -18,6 +19,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
+import zhegalov.course.work.model.GameSession;
 import zhegalov.course.work.model.gamesettings.ExpressionGameSettings;
 import zhegalov.course.work.model.gamesettings.ExpressionOperationV0;
 import zhegalov.course.work.service.GameSessionService;
@@ -39,6 +41,8 @@ public class GameSessionControllerTest {
         generatorSetup.setOperations(List.of(ExpressionOperationV0.SUM));
         final var mapper = new ObjectMapper();
         final var jsonString = mapper.writeValueAsString(generatorSetup);
+
+        given(sessionService.create(any())).willReturn(new GameSession());
 
         mvc.perform(
                 post("/api/sessions").content(jsonString).header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON))

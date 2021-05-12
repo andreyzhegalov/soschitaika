@@ -21,19 +21,20 @@ public class QuestionController {
 
     @PostMapping("/api/questions")
     @ResponseStatus(HttpStatus.CREATED)
-    public QuestionDto createQuestion(@RequestBody SessionDto session){
+    public QuestionDto createQuestion(@RequestBody SessionDto session) {
         final var gameSession = sessionService.getGameSession(session.getSessionId());
-        if(gameSession.isEmpty()){
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "session with id " + session.getSessionId() + " not found");
+        if (gameSession.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                    "session with id " + session.getSessionId() + " not found");
         }
-        if(sessionService.isSessionComplete(gameSession.get())){
-            throw new ResponseStatusException(HttpStatus.NO_CONTENT, "session with id " + session.getSessionId() + " is completed");
+        if (sessionService.isSessionComplete(gameSession.get())) {
+            throw new ResponseStatusException(HttpStatus.NO_CONTENT,
+                    "session with id " + session.getSessionId() + " is completed");
         }
 
-		final var question = questionService.createQuestion(gameSession.get());
+        final var question = questionService.createQuestion(gameSession.get());
         final var savedQuestion = questionService.saveQuestion(question);
         return new QuestionDto(savedQuestion);
     }
 
 }
-

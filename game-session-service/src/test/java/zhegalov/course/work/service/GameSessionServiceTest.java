@@ -7,6 +7,7 @@ import static org.mockito.BDDMockito.then;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
@@ -61,6 +62,7 @@ public class GameSessionServiceTest {
     @Test
     void shouldReturnNotCompletedSessionIfQuestionNotFounded() {
         final var gameSession = new GameSession();
+        gameSession.setQuestionCount(2);
         given(questionService.getQuestions(gameSession)).willReturn(Collections.emptyList());
 
         assertThat(sessionService.isSessionComplete(gameSession)).isFalse();
@@ -73,7 +75,8 @@ public class GameSessionServiceTest {
         final var questionsWithAnswer = Arrays.asList(new Question(), new Question());
         questionsWithAnswer.forEach(q -> q.setAnswer(""));
         final var gameSession = new GameSession();
-        given(questionService.getQuestions(gameSession)).willReturn(questionsWithAnswer);
+        gameSession.setQuestionCount(2);
+        given(questionService.getQuestions(gameSession)).willReturn(makeQuestionsWithAnswer());
 
         assertThat(sessionService.isSessionComplete(gameSession)).isTrue();
 
@@ -81,11 +84,29 @@ public class GameSessionServiceTest {
     }
 
     @Test
-    void shouldReturnNotCompletedSessionIfSomeQuestionHasNotAnswer() {
-        final var questionsWithAnswer = Arrays.asList(new Question(), new Question());
-        questionsWithAnswer.get(0).setAnswer("");
+    void souldRuturnNotCompletedSessionIfNotAllQuestionWithAnswerFounded() {
         final var gameSession = new GameSession();
-        given(questionService.getQuestions(gameSession)).willReturn(questionsWithAnswer);
+        gameSession.setQuestionCount(3);
+        given(questionService.getQuestions(gameSession)).willReturn(makeQuestionsWithAnswer());
+
+        assertThat(sessionService.isSessionComplete(gameSession)).isFalse();
+
+        then(questionService).should().getQuestions(any());
+    }
+
+    private List<Question> makeQuestionsWithAnswer() {
+        final var questionsWithAnswer = Arrays.asList(new Question(), new Question());
+        questionsWithAnswer.forEach(q -> q.setAnswer(""));
+        return questionsWithAnswer;
+    }
+
+    @Test
+    void shouldReturnNotCompletedSessionIfSomeQuestionHasNotAnswer() {
+        final var questionsWithNotAllAnswers = Arrays.asList(new Question(), new Question());
+        questionsWithNotAllAnswers.get(0).setAnswer("");
+        final var gameSession = new GameSession();
+        gameSession.setQuestionCount(2);
+        given(questionService.getQuestions(gameSession)).willReturn(questionsWithNotAllAnswers);
 
         assertThat(sessionService.isSessionComplete(gameSession)).isFalse();
 

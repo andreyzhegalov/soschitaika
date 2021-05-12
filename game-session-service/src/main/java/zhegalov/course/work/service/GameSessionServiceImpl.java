@@ -6,10 +6,12 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import zhegalov.course.work.model.GameSession;
 import zhegalov.course.work.model.GameSettings;
 import zhegalov.course.work.respositories.GameSessionRepository;
 
+@Slf4j
 @RequiredArgsConstructor
 @Service
 public class GameSessionServiceImpl implements GameSessionService {
@@ -31,10 +33,13 @@ public class GameSessionServiceImpl implements GameSessionService {
     @Override
     public boolean isSessionComplete(GameSession gameSession) {
         final var questions = questionService.getQuestions(gameSession);
+        log.debug("founded questions {}", questions.size());
         if (questions.isEmpty()) {
             return false;
         }
-        return questions.stream().filter(q -> Objects.isNull(q.getAnswer())).count() == 0;
+        final var countQuestionsWithAnswer = questions.stream().filter(q -> Objects.nonNull(q.getAnswer())).count();
+        log.debug("founded questions with answer {}", countQuestionsWithAnswer);
+        return countQuestionsWithAnswer == gameSession.getQuestionCount();
     }
 
 }
