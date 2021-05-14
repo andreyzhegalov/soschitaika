@@ -20,8 +20,8 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import zhegalov.course.work.model.GameSession;
-import zhegalov.course.work.model.gamesettings.ExpressionGameSettings;
-import zhegalov.course.work.model.gamesettings.ExpressionOperationV0;
+import zhegalov.course.work.model.gamesettings.CalculatingGameSettings;
+import zhegalov.course.work.model.gamesettings.CalculationOperation;
 import zhegalov.course.work.service.GameSessionService;
 
 @WebMvcTest(controllers = GameSessionController.class)
@@ -34,11 +34,11 @@ public class GameSessionControllerTest {
 
     @Test
     void shouldSaveNewSession() throws Exception {
-        final var generatorSetup = new ExpressionGameSettings();
+        final var generatorSetup = new CalculatingGameSettings();
         generatorSetup.setMin(0);
         generatorSetup.setMax(1);
         generatorSetup.setValueCnt(5);
-        generatorSetup.setOperations(List.of(ExpressionOperationV0.SUM));
+        generatorSetup.setOperations(List.of(CalculationOperation.SUM));
         final var gameSession = new GameSession();
         gameSession.setQuestionCount(2);
         gameSession.setGameSettings(generatorSetup);

@@ -1,4 +1,4 @@
-package zhegalov.course.work.service.expression.convertors;
+package zhegalov.course.work.service.calculatinggame.convertors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import zhegalov.course.work.feign.dto.ExpressionDto;
 
-public class ExpressionConvertorTest {
+public class ExpressionConverterTest {
 
     @Test
     void shouldConvertToQuestion() {
@@ -14,7 +14,7 @@ public class ExpressionConvertorTest {
         expression.setExpression("1+1");
         expression.setResult(2);
 
-        final var question = ExpressionConvertor.createQuestion(expression);
+        final var question = ExpressionConverter.createQuestion(expression);
 
         assertThat(question.getId()).isNull();
         assertThat(question.getAnswer()).isNull();

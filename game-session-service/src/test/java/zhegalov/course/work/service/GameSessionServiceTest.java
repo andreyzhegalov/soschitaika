@@ -83,7 +83,7 @@ public class GameSessionServiceTest {
     }
 
     @Test
-    void souldReturnNotCompletedSessionIfNotAllQuestionWithAnswerFounded() {
+    void shouldReturnNotCompletedSessionIfNotAllQuestionWithAnswerFounded() {
         final var gameSession = new GameSession();
         gameSession.setQuestionCount(3);
         given(questionService.getQuestions(gameSession)).willReturn(makeQuestionsWithAnswer());

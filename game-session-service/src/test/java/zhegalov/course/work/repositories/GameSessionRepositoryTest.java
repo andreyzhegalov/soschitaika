@@ -9,7 +9,7 @@ import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 import org.springframework.context.annotation.ComponentScan;
 
 import zhegalov.course.work.model.GameSession;
-import zhegalov.course.work.model.gamesettings.ExpressionGameSettings;
+import zhegalov.course.work.model.gamesettings.CalculatingGameSettings;
 import zhegalov.course.work.model.othergame.OtherGameSettings;
 import zhegalov.course.work.respositories.GameSessionRepository;
 
@@ -28,7 +28,7 @@ public class GameSessionRepositoryTest {
     @Test
     void shouldSaveSessionWithCorrectlySettingsType() {
         final var calculatingGameSession = new GameSession();
-        final var calculationGameSettings = new ExpressionGameSettings();
+        final var calculationGameSettings = new CalculatingGameSettings();
         calculationGameSettings.setMin(3);
         calculatingGameSession.setGameSettings(calculationGameSettings);
         final var savedCalculatingGameSession = gameSessionRepository.save(calculatingGameSession);
@@ -43,7 +43,7 @@ public class GameSessionRepositoryTest {
                 .findById(savedCalculatingGameSession.getId());
         assertThat(calculatingGameSessionFromRepository).isNotEmpty();
         assertThat(calculatingGameSessionFromRepository.get().getGameSettings()).isNotNull()
-                .isInstanceOf(ExpressionGameSettings.class).extracting("min").isEqualTo(3);
+                .isInstanceOf(CalculatingGameSettings.class).extracting("min").isEqualTo(3);
 
         final var otherGameSessionFromRepository = gameSessionRepository.findById(savedOtherGameSession.getId());
         assertThat(otherGameSessionFromRepository).isNotEmpty();

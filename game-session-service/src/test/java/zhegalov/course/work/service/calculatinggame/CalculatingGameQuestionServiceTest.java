@@ -1,4 +1,4 @@
-package zhegalov.course.work.service.expression;
+package zhegalov.course.work.service.calculatinggame;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
@@ -19,14 +19,14 @@ import zhegalov.course.work.feign.ExpressionServiceProxy;
 import zhegalov.course.work.feign.dto.ExpressionDto;
 import zhegalov.course.work.model.GameSession;
 import zhegalov.course.work.model.Question;
-import zhegalov.course.work.model.gamesettings.ExpressionGameSettings;
-import zhegalov.course.work.model.gamesettings.ExpressionOperationV0;
+import zhegalov.course.work.model.gamesettings.CalculatingGameSettings;
+import zhegalov.course.work.model.gamesettings.CalculationOperation;
 import zhegalov.course.work.respositories.QuestionRepository;
 import zhegalov.course.work.service.QuestionService;
 
 @SpringBootTest
-public class ExpressionQuestionServiceTest {
-    @Import(ExpressionQuestionService.class)
+public class CalculatingGameQuestionServiceTest {
+    @Import(CalculatingGameQuestionService.class)
     @Configuration
     public static class TestContext {
     }
@@ -41,12 +41,12 @@ public class ExpressionQuestionServiceTest {
     private QuestionRepository questionRepository;
 
     @Test
-    void shouldReciveExpressionFromExpressionService() {
-        final var gameSettings = new ExpressionGameSettings();
+    void shouldReceiveExpressionFromExpressionService() {
+        final var gameSettings = new CalculatingGameSettings();
         gameSettings.setMax(10);
         gameSettings.setMax(1);
         gameSettings.setValueCnt(2);
-        gameSettings.setOperations(List.of(ExpressionOperationV0.MUL));
+        gameSettings.setOperations(List.of(CalculationOperation.MUL));
         final var gameSession = new GameSession();
         gameSession.setGameSettings(gameSettings);
         final var sessionId = "sessionId";

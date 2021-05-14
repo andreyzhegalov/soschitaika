@@ -62,7 +62,7 @@ public class AnswerServiceImplTest {
     }
 
     @Test
-    void souldThrowExceptionWhenAnswerCanNotBeSaved() {
+    void shouldThrowExceptionWhenAnswerCanNotBeSaved() {
         given(questionRepository.findById(anyString())).willReturn(Optional.of(new Question()));
         given(questionRepository.save(any())).willThrow(new GameServiceException());
 

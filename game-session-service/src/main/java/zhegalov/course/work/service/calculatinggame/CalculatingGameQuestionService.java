@@ -1,4 +1,4 @@
-package zhegalov.course.work.service.expression;
+package zhegalov.course.work.service.calculatinggame;
 
 import java.util.List;
 
@@ -11,21 +11,21 @@ import zhegalov.course.work.model.GameSession;
 import zhegalov.course.work.model.Question;
 import zhegalov.course.work.respositories.QuestionRepository;
 import zhegalov.course.work.service.QuestionService;
-import zhegalov.course.work.service.expression.convertors.ExpressionConvertor;
-import zhegalov.course.work.service.expression.convertors.GameSettingsConvertor;
+import zhegalov.course.work.service.calculatinggame.convertors.ExpressionConverter;
+import zhegalov.course.work.service.calculatinggame.convertors.GameSettingsConverter;
 
 @RequiredArgsConstructor
 @Service
-public class ExpressionQuestionService implements QuestionService {
+public class CalculatingGameQuestionService implements QuestionService {
     @Autowired
     private ExpressionServiceProxy expressionServiceProxy;
     private final QuestionRepository questionRepository;
 
     @Override
     public Question createQuestion(GameSession session) {
-        final var generatorSetup = GameSettingsConvertor.convertGameSettings(session.getGameSettings());
+        final var generatorSetup = GameSettingsConverter.convertGameSettings(session.getGameSettings());
         final var expression = expressionServiceProxy.createExpression(generatorSetup);
-        final var question = ExpressionConvertor.createQuestion(expression);
+        final var question = ExpressionConverter.createQuestion(expression);
         setSessionId(session, question);
         return question;
     }

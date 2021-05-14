@@ -14,7 +14,7 @@ import lombok.RequiredArgsConstructor;
 import zhegalov.course.work.controllers.dto.SessionDto;
 import zhegalov.course.work.model.GameSession;
 import zhegalov.course.work.model.GameSettings;
-import zhegalov.course.work.model.gamesettings.ExpressionGameSettings;
+import zhegalov.course.work.model.gamesettings.CalculatingGameSettings;
 import zhegalov.course.work.service.GameSessionService;
 
 @RequiredArgsConstructor
@@ -29,7 +29,7 @@ public class GameSessionController {
     @ResponseStatus(HttpStatus.CREATED)
     SessionDto saveNewSession(HttpEntity<String> httpEntity) throws JsonMappingException, JsonProcessingException {
         final var bodyString = httpEntity.getBody();
-        final var settings = getGameSettings(bodyString, ExpressionGameSettings.class);
+        final var settings = getGameSettings(bodyString, CalculatingGameSettings.class);
 
         final var session = new GameSession();
         session.setGameSettings(settings);

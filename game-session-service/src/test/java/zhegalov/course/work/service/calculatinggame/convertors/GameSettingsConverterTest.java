@@ -1,4 +1,4 @@
-package zhegalov.course.work.service.expression.convertors;
+package zhegalov.course.work.service.calculatinggame.convertors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -7,20 +7,20 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import zhegalov.course.work.feign.dto.ExpressionOperation;
-import zhegalov.course.work.model.gamesettings.ExpressionGameSettings;
-import zhegalov.course.work.model.gamesettings.ExpressionOperationV0;
+import zhegalov.course.work.model.gamesettings.CalculatingGameSettings;
+import zhegalov.course.work.model.gamesettings.CalculationOperation;
 
-public class GameSettingsConvertorTest {
+public class GameSettingsConverterTest {
     @Test
     void shouldConvertGameSettings() {
-        final var gameSettings = new ExpressionGameSettings();
+        final var gameSettings = new CalculatingGameSettings();
         gameSettings.setMax(10);
         gameSettings.setMax(1);
         gameSettings.setValueCnt(2);
-        gameSettings.setOperations(List.of(ExpressionOperationV0.MUL, ExpressionOperationV0.DIV,
-                ExpressionOperationV0.SUB, ExpressionOperationV0.SUM));
+        gameSettings.setOperations(List.of(CalculationOperation.MUL, CalculationOperation.DIV,
+                CalculationOperation.SUB, CalculationOperation.SUM));
 
-        final var generatorSetup = GameSettingsConvertor.convertGameSettings(gameSettings);
+        final var generatorSetup = GameSettingsConverter.convertGameSettings(gameSettings);
 
         assertThat(generatorSetup).isNotNull();
         assertThat(generatorSetup.getMin()).isEqualTo(gameSettings.getMin());

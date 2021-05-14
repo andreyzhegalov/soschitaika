@@ -1,6 +1,6 @@
 package zhegalov.course.work.model.gamesettings;
 
-public enum ExpressionOperationV0 {
+public enum CalculationOperation {
     UNDEFINED, SUM, SUB, MUL, DIV
 }
 
