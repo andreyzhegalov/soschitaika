@@ -1,13 +1,19 @@
 server:
-  port: 8030
+  port: 8031
   error:
     include-stacktrace: always
+
+spring:
+  data:
+    mongodb:
+      database: soschitaika
+      uri: mongodb://localhost
 
 management:
   endpoints:
     web:
       exposure:
-        include: metrics,health,logfile
+        include: metrics,health
   endpoint:
     health:
       show-details: always

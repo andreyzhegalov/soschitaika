@@ -1,0 +1,15 @@
+webserver:
+  gamesession:
+    address: http://localhost:8030
+
+spring:
+  data:
+    mongodb:
+      database: soschitaika
+      uri: mongodb://localhost
+
+logging:
+  level:
+    ROOT: INFO
+    org.springframework: INFO
+    zhegalov.course.work: INFO

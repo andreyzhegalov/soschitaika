@@ -1,6 +1,6 @@
 package zhegalov.course.work.model;
 
-public class Result {
+public abstract class GameSettings {
 
 }
 
