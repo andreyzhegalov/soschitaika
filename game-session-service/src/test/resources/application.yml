@@ -6,7 +6,7 @@ spring:
   data:
     mongodb:
       database: soschitaika
-      uri: mongodb://172.17.0.3
+      uri: mongodb://localhost
 
 logging:
   level:
