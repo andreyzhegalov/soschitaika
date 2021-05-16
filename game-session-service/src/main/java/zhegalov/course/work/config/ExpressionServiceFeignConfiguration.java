@@ -14,6 +14,20 @@ import feign.RequestInterceptor;
 @SuppressWarnings("deprecation")
 public class ExpressionServiceFeignConfiguration {
 
+    // private static class RequestInterceptorImpl implements RequestInterceptor {
+    //
+    //     private OAuth2AccessToken getAccessToken(
+    //             @RegisteredOAuth2AuthorizedClient("messaging-client-authorization-code") OAuth2AuthorizedClient authorizedClient) {
+    //         return authorizedClient.getAccessToken();
+    //     }
+    //
+    //     @Override
+    //     public void apply(RequestTemplate template) {
+    //         final var jwtToken = getAccessToken(authorizedClient)
+    //         template.header("Authorization", jwtToken);
+    //     }
+    // }
+    //
     @Bean
     public RequestInterceptor requestInterceptor() {
         return new OAuth2FeignRequestInterceptor(new DefaultOAuth2ClientContext(), resource());
@@ -26,7 +40,7 @@ public class ExpressionServiceFeignConfiguration {
 
     private OAuth2ProtectedResourceDetails resource() {
         final var details = new ClientCredentialsResourceDetails();
-        details.setAccessTokenUri("http://auth-server:9000/oauth2/token" );
+        details.setAccessTokenUri("http://auth-server:9000/oauth2/token");
         details.setClientId("messaging-client");
         details.setClientSecret("secret");
         details.setScope(Arrays.asList("message.read", "message.write"));

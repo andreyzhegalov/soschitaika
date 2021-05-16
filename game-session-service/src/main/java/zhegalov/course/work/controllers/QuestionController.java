@@ -1,6 +1,8 @@
 package zhegalov.course.work.controllers;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
+import org.springframework.security.oauth2.client.annotation.RegisteredOAuth2AuthorizedClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -21,7 +23,9 @@ public class QuestionController {
 
     @PostMapping("/api/questions")
     @ResponseStatus(HttpStatus.CREATED)
-    public QuestionDto createQuestion(@RequestBody SessionDto session) {
+    public QuestionDto createQuestion(@RequestBody SessionDto session,
+                @RegisteredOAuth2AuthorizedClient("messaging-client-oidc") OAuth2AuthorizedClient authorizedClient) {
+
         final var gameSession = sessionService.getGameSession(session.getSessionId());
         if (gameSession.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,
@@ -32,7 +36,7 @@ public class QuestionController {
                     "session with id " + session.getSessionId() + " is completed");
         }
 
-        final var question = questionService.createQuestion(gameSession.get());
+        final var question = questionService.createQuestion(gameSession.get(), authorizedClient);
         final var savedQuestion = questionService.saveQuestion(question);
         return new QuestionDto(savedQuestion);
     }
