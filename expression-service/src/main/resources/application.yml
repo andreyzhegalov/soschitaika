@@ -3,6 +3,13 @@ server:
   error:
     include-stacktrace: always
 
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://auth-server:9000
+
 management:
   endpoints:
     web:
@@ -16,3 +23,6 @@ logging:
   level:
     ROOT: INFO
     org.springframework: INFO
+    org.springframework.security: DEBUG
+    org.springframework.security.oauth2: DEBUG
+
