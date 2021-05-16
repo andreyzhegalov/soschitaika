@@ -1,5 +1,5 @@
 server:
-  port: 8031
+  port: 8030
   error:
     include-stacktrace: always
 
@@ -8,6 +8,39 @@ spring:
     mongodb:
       database: soschitaika
       uri: mongodb://localhost
+  security:
+    oauth2:
+      client:
+        registration:
+          messaging-client-oidc:
+            provider: spring
+            client-id: messaging-client
+            client-secret: secret
+            authorization-grant-type: authorization_code
+            redirect-uri: "http://192.168.1.139:8030/login/oauth2/code/{registrationId}"
+            scope: openid
+            client-name: messaging-client-oidc
+          messaging-client-authorization-code:
+            provider: spring
+            client-id: messaging-client
+            client-secret: secret
+            authorization-grant-type: authorization_code
+            redirect-uri: "http://127.0.0.1:8030/api/sessions"
+            scope: message.read,message.write
+            client-name: messaging-client-authorization-code
+          # messaging-client-client-credentials:
+          #   provider: spring
+          #   client-id: messaging-client
+          #   client-secret: secret
+          #   authorization-grant-type: client_credentials
+          #   scope: message.read,message.write
+          #   client-name: messaging-client-client-credentials
+        provider:
+          spring:
+            issuer-uri: http://auth-server:9000
+
+messages:
+  base-uri: http://127.0.0.1:8091/messages
 
 management:
   endpoints:
@@ -20,5 +53,7 @@ management:
 
 logging:
   level:
-    ROOT: INFO
-    org.springframework: INFO
+    ROOT: DEBUG
+    org.springframework: DEBUG
+    org.springframework.security.oauth2: DEBUG
+

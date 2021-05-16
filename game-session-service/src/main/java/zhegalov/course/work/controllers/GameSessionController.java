@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,10 +25,16 @@ public class GameSessionController {
     private final static String GAME_SETTINGS_NODE = "gameSettings";
     private final GameSessionService sessionService;
 
+    @GetMapping(path = "/api/sessions")
+    @ResponseStatus(HttpStatus.OK)
+    SessionDto getNewSession(){
+        return new SessionDto();
+    }
 
     @PostMapping(path = "/api/sessions")
     @ResponseStatus(HttpStatus.CREATED)
-    SessionDto saveNewSession(HttpEntity<String> httpEntity) throws JsonMappingException, JsonProcessingException {
+    SessionDto saveNewSession(HttpEntity<String> httpEntity)
+            throws JsonMappingException, JsonProcessingException {
         final var bodyString = httpEntity.getBody();
         final var settings = getGameSettings(bodyString, CalculatingGameSettings.class);
 
@@ -48,6 +55,6 @@ public class GameSessionController {
             throws JsonMappingException, JsonProcessingException {
         final var objectMapper = new ObjectMapper();
         final var jsonNode = objectMapper.readTree(bodyString);
-        return (GameSettings)objectMapper.treeToValue(jsonNode.get(GAME_SETTINGS_NODE), gameSettingsClass);
+        return (GameSettings) objectMapper.treeToValue(jsonNode.get(GAME_SETTINGS_NODE), gameSettingsClass);
     }
 }
