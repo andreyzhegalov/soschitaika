@@ -6,10 +6,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import zhegalov.course.work.config.ExpressionServiceFeignConfiguration;
 import zhegalov.course.work.feign.dto.ExpressionDto;
 import zhegalov.course.work.feign.dto.GeneratorSetup;
 
-@FeignClient(name = "currency-conversion", url = "http://localhost:8031")
+@FeignClient(name = "currency-conversion", url = "http://localhost:8031", configuration = ExpressionServiceFeignConfiguration.class)
 public interface ExpressionServiceProxy {
 
     @PostMapping(path = "/api/expressions")
