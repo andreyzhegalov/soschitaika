@@ -9,10 +9,12 @@ import zhegalov.course.work.model.Question;
 
 public interface QuestionService {
 
-    Question createQuestion(GameSession session, OAuth2AuthorizedClient authorizedClient);
+    Question createQuestion(GameSession session);
 
     Question saveQuestion(Question question);
 
     List<Question> getQuestions(GameSession session);
+
+    void setOAuth2AuthorizedClient(OAuth2AuthorizedClient authorizedClient);
 
 }

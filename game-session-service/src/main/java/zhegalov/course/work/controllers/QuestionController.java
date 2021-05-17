@@ -36,7 +36,8 @@ public class QuestionController {
                     "session with id " + session.getSessionId() + " is completed");
         }
 
-        final var question = questionService.createQuestion(gameSession.get(), authorizedClient);
+        questionService.setOAuth2AuthorizedClient(authorizedClient);
+        final var question = questionService.createQuestion(gameSession.get());
         final var savedQuestion = questionService.saveQuestion(question);
         return new QuestionDto(savedQuestion);
     }
