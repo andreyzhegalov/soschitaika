@@ -11,6 +11,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpHeaders;
@@ -23,6 +24,7 @@ import zhegalov.course.work.model.expression.ExpressionOperation;
 import zhegalov.course.work.service.ExpressionGeneratorService;
 
 @WebMvcTest(controllers = ExpressionController.class)
+@AutoConfigureMockMvc(addFilters = false)
 public class ExpressionControllerTest {
     @Autowired
     private MockMvc mvc;
