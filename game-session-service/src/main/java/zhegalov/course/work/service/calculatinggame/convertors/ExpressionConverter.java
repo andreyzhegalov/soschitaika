@@ -1,6 +1,6 @@
 package zhegalov.course.work.service.calculatinggame.convertors;
 
-import zhegalov.course.work.feign.dto.ExpressionDto;
+import zhegalov.course.work.controllers.dto.ExpressionDto;
 import zhegalov.course.work.model.Question;
 
 public class ExpressionConverter {

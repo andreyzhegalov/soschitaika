@@ -14,20 +14,6 @@ import feign.RequestInterceptor;
 @SuppressWarnings("deprecation")
 public class ExpressionServiceFeignConfiguration {
 
-    // private static class RequestInterceptorImpl implements RequestInterceptor {
-    //
-    //     private OAuth2AccessToken getAccessToken(
-    //             @RegisteredOAuth2AuthorizedClient("messaging-client-authorization-code") OAuth2AuthorizedClient authorizedClient) {
-    //         return authorizedClient.getAccessToken();
-    //     }
-    //
-    //     @Override
-    //     public void apply(RequestTemplate template) {
-    //         final var jwtToken = getAccessToken(authorizedClient)
-    //         template.header("Authorization", jwtToken);
-    //     }
-    // }
-    //
     @Bean
     public RequestInterceptor requestInterceptor() {
         return new OAuth2FeignRequestInterceptor(new DefaultOAuth2ClientContext(), resource());
