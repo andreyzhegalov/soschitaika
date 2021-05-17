@@ -17,7 +17,7 @@ spring:
             client-id: messaging-client
             client-secret: secret
             authorization-grant-type: authorization_code
-            redirect-uri: "http://192.168.1.139:8030/login/oauth2/code/{registrationId}"
+            redirect-uri: "http://game-server:8030/login/oauth2/code/{registrationId}"
             scope: openid,message.read
             client-name: messaging-client-oidc
         provider:
