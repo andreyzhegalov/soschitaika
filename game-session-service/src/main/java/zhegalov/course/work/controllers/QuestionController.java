@@ -24,7 +24,7 @@ public class QuestionController {
     @PostMapping("/api/questions")
     @ResponseStatus(HttpStatus.CREATED)
     public QuestionDto createQuestion(@RequestBody SessionDto session,
-                @RegisteredOAuth2AuthorizedClient("messaging-client-oidc") OAuth2AuthorizedClient authorizedClient) {
+                @RegisteredOAuth2AuthorizedClient("expression-client-oidc") OAuth2AuthorizedClient authorizedClient) {
 
         final var gameSession = sessionService.getGameSession(session.getSessionId());
         if (gameSession.isEmpty()) {

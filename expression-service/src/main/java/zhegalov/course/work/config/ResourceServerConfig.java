@@ -8,21 +8,21 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class ResourceServerConfig {
 
-	// @formatter:off
-	@Bean
-	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-		http
-			.mvcMatcher("/api/expressions/**")
+    // @formatter:off
+    @Bean
+    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http
+            .mvcMatcher("/api/expressions/**")
             .authorizeRequests()
-            .mvcMatchers("/api/expressions/**").access("hasAuthority('SCOPE_message.read')")
+            .mvcMatchers("/api/expressions/**").access("hasAuthority('SCOPE_expression.read')")
             .and()
             .csrf().disable()
-			.oauth2ResourceServer()
+            .oauth2ResourceServer()
             .jwt();
 
-		return http.build();
-	}
-	// @formatter:on
+        return http.build();
+    }
+    // @formatter:on
 
 }
 

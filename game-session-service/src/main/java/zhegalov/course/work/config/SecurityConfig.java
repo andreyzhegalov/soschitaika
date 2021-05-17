@@ -16,7 +16,7 @@ public class SecurityConfig {
                 authorizeRequests.anyRequest().authenticated()
             )
             .oauth2Login(oauth2Login ->
-                oauth2Login.loginPage("/oauth2/authorization/messaging-client-oidc"))
+                oauth2Login.loginPage("/oauth2/authorization/expression-client-oidc"))
             .oauth2Client(withDefaults())
             .csrf().disable();
         return http.build();
