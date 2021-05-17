@@ -13,11 +13,13 @@ public class ResourceServerConfig {
 	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http
 			.mvcMatcher("/api/expressions/**")
-				.authorizeRequests()
-					.mvcMatchers("/api/expressions/**").access("hasAuthority('SCOPE_message.read')")
-					.and()
+            .authorizeRequests()
+            .mvcMatchers("/api/expressions/**").access("hasAuthority('SCOPE_message.read')")
+            .and()
+            .csrf().disable()
 			.oauth2ResourceServer()
-				.jwt();
+            .jwt();
+
 		return http.build();
 	}
 	// @formatter:on

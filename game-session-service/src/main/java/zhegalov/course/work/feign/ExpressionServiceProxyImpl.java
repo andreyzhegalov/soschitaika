@@ -14,30 +14,29 @@ import zhegalov.course.work.controllers.dto.GeneratorSetup;
 
 @Service
 @RequiredArgsConstructor
-public class ExpressionServiceProxyImpl implements ExpressionServiceProxy{
-  	private final WebClient webClient;
+public class ExpressionServiceProxyImpl implements ExpressionServiceProxy {
+    private static final String EXPRESSION_URI = "/api/expressions";
 
-    @Value("${messages.base-uri}")
-	private String messagesBaseUri;
+    private final WebClient webClient;
+
+    @Value("${expression.base-uri}")
+    private String expressionServiceBaseUri;
 
     private OAuth2AuthorizedClient authorizedClient;
 
-	@Override
-	public ExpressionDto createExpression(GeneratorSetup generatorSetup) {
-		final var expression = this.webClient
-				.post()
-				.uri(messagesBaseUri)
-				.attributes(oauth2AuthorizedClient(authorizedClient))
+    @Override
+    public ExpressionDto createExpression(GeneratorSetup generatorSetup) {
+        final var expression = this.webClient.post().uri(expressionServiceBaseUri + EXPRESSION_URI)
+                .attributes(oauth2AuthorizedClient(authorizedClient))
                 .body(Mono.just(generatorSetup), GeneratorSetup.class)
-				.retrieve()
-				.bodyToMono(ExpressionDto.class)
-				.block();
+                .retrieve()
+                .bodyToMono(ExpressionDto.class)
+                .block();
         return expression;
-	}
+    }
 
-	@Override
-	public void setOAuth2AuthorizedClient(OAuth2AuthorizedClient authorizedClient) {
+    @Override
+    public void setOAuth2AuthorizedClient(OAuth2AuthorizedClient authorizedClient) {
         this.authorizedClient = authorizedClient;
-	}
+    }
 }
-
