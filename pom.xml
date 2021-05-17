@@ -31,7 +31,6 @@
     <modules>
         <module>expression-service</module>
         <module>game-session-service</module>
-        <module>authorization-service</module>
     </modules>
 
     <build>
