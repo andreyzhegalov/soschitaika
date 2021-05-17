@@ -26,13 +26,12 @@ public class ExpressionServiceProxyImpl implements ExpressionServiceProxy {
 
     @Override
     public ExpressionDto createExpression(GeneratorSetup generatorSetup) {
-        final var expression = this.webClient.post().uri(expressionServiceBaseUri + EXPRESSION_URI)
+        return this.webClient.post().uri(expressionServiceBaseUri + EXPRESSION_URI)
                 .attributes(oauth2AuthorizedClient(authorizedClient))
                 .body(Mono.just(generatorSetup), GeneratorSetup.class)
                 .retrieve()
                 .bodyToMono(ExpressionDto.class)
                 .block();
-        return expression;
     }
 
     @Override

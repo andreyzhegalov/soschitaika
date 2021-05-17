@@ -6,7 +6,6 @@ import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
-import sample.jose.Jwks;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,6 +23,8 @@ import org.springframework.security.oauth2.server.authorization.client.Registere
 import org.springframework.security.oauth2.server.authorization.config.ProviderSettings;
 import org.springframework.security.web.SecurityFilterChain;
 
+import sample.jose.Jwks;
+
 @Configuration(proxyBeanMethods = false)
 public class AuthorizationServerConfig {
 
@@ -38,18 +39,18 @@ public class AuthorizationServerConfig {
     // @formatter:off
     @Bean
     public RegisteredClientRepository registeredClientRepository() {
-        RegisteredClient registeredClient = RegisteredClient.withId(UUID.randomUUID().toString())
-                .clientId("messaging-client")
+        final var registeredClient = RegisteredClient.withId(UUID.randomUUID().toString())
+                .clientId("expression-client")
                 .clientSecret("secret")
                 .clientAuthenticationMethod(ClientAuthenticationMethod.BASIC)
                 .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
                 .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
                 .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
-                .redirectUri("http://192.168.1.139:8030/login/oauth2/code/messaging-client-oidc")
-                .redirectUri("http://192.168.1.139:8030/authorized")
+                .redirectUri("http://game-server:8030/login/oauth2/code/expression-client-oidc")
+                .redirectUri("http://game-server:8030/authorized")
                 .scope(OidcScopes.OPENID)
-                .scope("message.read")
-                .scope("message.write")
+                .scope("expression.read")
+                .scope("expression.write")
                 .clientSettings(clientSettings -> clientSettings.requireUserConsent(true))
                 .build();
     return new InMemoryRegisteredClientRepository(registeredClient);
