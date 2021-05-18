@@ -3,5 +3,5 @@ jasper:
 
 logging:
   level:
-    ROOT: INFO
-    org.springframework: INFO
+    ROOT: DEBUG
+    org.springframework: DEBUG
