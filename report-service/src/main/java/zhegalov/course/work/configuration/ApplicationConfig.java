@@ -9,7 +9,6 @@ import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.export.JRPdfExporter;
 import net.sf.jasperreports.export.Exporter;
-import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
 import net.sf.jasperreports.export.SimplePdfExporterConfiguration;
 import net.sf.jasperreports.export.SimplePdfReportConfiguration;
 
@@ -25,7 +24,6 @@ public class ApplicationConfig {
     @Bean
     Exporter getExporter(){
         final var exporter = new JRPdfExporter();
-        exporter.setExporterOutput(new SimpleOutputStreamExporterOutput("employeeReport.pdf"));
 
         final var reportConfig = new SimplePdfReportConfiguration();
         reportConfig.setSizePageToContent(true);

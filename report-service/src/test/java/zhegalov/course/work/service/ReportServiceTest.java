@@ -41,7 +41,8 @@ public class ReportServiceTest {
         final var jsonDataSource = new JsonDataSource(jsonDataStream);
         final var report = reportService.createReport(jsonDataSource) ;
 
-        reportService.print(report);
+        final var byteArray = reportService.print(report);
+        assertThat(byteArray).isNotNull();
 
         BDDMockito.then(exporter).should().exportReport();
     }
