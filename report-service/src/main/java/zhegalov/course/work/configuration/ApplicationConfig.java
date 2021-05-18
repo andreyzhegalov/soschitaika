@@ -7,6 +7,11 @@ import org.springframework.context.annotation.Configuration;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.export.JRPdfExporter;
+import net.sf.jasperreports.export.Exporter;
+import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
+import net.sf.jasperreports.export.SimplePdfExporterConfiguration;
+import net.sf.jasperreports.export.SimplePdfReportConfiguration;
 
 @Configuration
 public class ApplicationConfig {
@@ -14,5 +19,24 @@ public class ApplicationConfig {
     JasperReport getJasperReport(@Value("${jasper.template}") String reportTemplatePath) throws JRException {
         final var reportTemplate = getClass().getClassLoader().getResourceAsStream(reportTemplatePath);
         return JasperCompileManager.compileReport(reportTemplate);
+    }
+
+    @SuppressWarnings("rawtypes")
+    @Bean
+    Exporter getExporter(){
+        final var exporter = new JRPdfExporter();
+        exporter.setExporterOutput(new SimpleOutputStreamExporterOutput("employeeReport.pdf"));
+
+        final var reportConfig = new SimplePdfReportConfiguration();
+        reportConfig.setSizePageToContent(true);
+        reportConfig.setForceLineBreakPolicy(false);
+
+        final var exportConfig = new SimplePdfExporterConfiguration();
+        exportConfig.setEncrypted(true);
+        exportConfig.setAllowedPermissionsHint("PRINTING");
+
+        exporter.setConfiguration(reportConfig);
+        exporter.setConfiguration(exportConfig);
+        return exporter;
     }
 }
