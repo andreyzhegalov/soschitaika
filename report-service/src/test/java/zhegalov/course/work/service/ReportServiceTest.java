@@ -27,5 +27,13 @@ public class ReportServiceTest {
         assertThat( reportService.createReport(jsonDataSource) ).isNotNull();
     }
 
+    @Test
+    void shouldPrintReport() throws JRException{
+        final var rawJsonData = "{}";
+        final var jsonDataStream = new ByteArrayInputStream(rawJsonData.getBytes());
+        final var jsonDataSource = new JsonDataSource(jsonDataStream);
+        final var report = reportService.createReport(jsonDataSource) ;
+        reportService.print(report);
+    }
 }
 

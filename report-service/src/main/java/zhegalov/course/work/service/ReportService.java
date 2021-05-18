@@ -4,4 +4,6 @@ public interface ReportService<R, T> {
 
     R createReport(T data);
 
+    void print(R report);
+
 }
