@@ -2,32 +2,29 @@ package zhegalov.course.work.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.io.ByteArrayInputStream;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
+import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 
-import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.data.JsonDataSource;
 
-@SpringBootTest
+@SpringBootTest(webEnvironment = WebEnvironment.NONE)
 public class ReportServiceTest {
 
-    @Configuration
-    @Import(ReportServiceJasperReports.class)
-    public static class TestContext{
-    }
-
     @Autowired
-    private ReportService reportService;
-
-    @MockBean
-    private JasperReport jasperReport;
+    private ReportService<JasperPrint, JsonDataSource> reportService;
 
     @Test
-    void shouldCreateReport(){
-        assertThat( reportService.create() ).isNotNull();
+    void shouldCreateReport() throws JRException{
+        final var rawJsonData = "{}";
+        final var jsonDataStream = new ByteArrayInputStream(rawJsonData.getBytes());
+        final var jsonDataSource = new JsonDataSource(jsonDataStream);
+        assertThat( reportService.createReport(jsonDataSource) ).isNotNull();
     }
 
 }

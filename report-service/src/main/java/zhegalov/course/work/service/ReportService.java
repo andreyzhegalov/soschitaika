@@ -1,10 +1,7 @@
 package zhegalov.course.work.service;
 
-import zhegalov.course.work.model.Report;
+public interface ReportService<R, T> {
 
-public interface ReportService {
-
-    Report create();
+    R createReport(T data);
 
 }
-
