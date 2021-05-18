@@ -12,6 +12,9 @@ management:
     health:
       show-details: always
 
+jasper:
+  template: reportTemplates/gameReport.jrxml
+
 logging:
   level:
     ROOT: INFO
