@@ -34,6 +34,7 @@ public class IntegratedGetQuestionTest {
     private static final String API_ANSWER = "/api/answers";
     private static final String API_QUESTION = "/api/questions";
     private static final String API_SESSION = "/api/sessions";
+    private static final String API_REPORT = "/api/reports";
 
     @Value("${webserver.gamesession.address}")
     private String gameSessionServerAddress;
@@ -90,6 +91,13 @@ public class IntegratedGetQuestionTest {
         addHeaders(httpPostQuestion3);
         final var questionHttpResponse3 = HttpClientBuilder.create().build().execute(httpPostQuestion3);
         assertThat(questionHttpResponse3.getStatusLine().getStatusCode()).isEqualTo(HttpStatus.SC_NO_CONTENT);
+
+        // create report
+        final var httpPostReport = new HttpPost(gameSessionServerAddress + API_REPORT);
+        httpPostReport.setEntity(new StringEntity(responseSessionDtoString));
+        addHeaders(httpPostReport);
+        final var reportHttpResponse = HttpClientBuilder.create().build().execute(httpPostReport);
+        assertThat(reportHttpResponse.getStatusLine().getStatusCode()).isEqualTo(HttpStatus.SC_CREATED);
     }
 
     private void addHeaders(HttpEntityEnclosingRequest request) {

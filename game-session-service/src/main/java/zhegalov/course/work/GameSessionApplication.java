@@ -6,8 +6,8 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @EnableFeignClients(basePackages = "zhegalov.course.work.feign")
 @SpringBootApplication
-public class Main {
+public class GameSessionApplication {
     public static void main(String[] args) {
-        SpringApplication.run(Main.class, args);
+        SpringApplication.run(GameSessionApplication.class, args);
     }
 }

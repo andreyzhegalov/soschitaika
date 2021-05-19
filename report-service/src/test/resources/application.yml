@@ -1,0 +1,7 @@
+jasper:
+  template: reportTemplates/gameReport.jrxml
+
+logging:
+  level:
+    ROOT: INFO
+    org.springframework: INFO

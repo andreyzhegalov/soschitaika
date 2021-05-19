@@ -25,6 +25,5 @@ public class AnswerController {
             throw new NotFoundException();
         }
     }
-
 }
 

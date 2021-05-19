@@ -12,4 +12,6 @@ public interface QuestionRepository extends MongoRepository<Question, String> {
 
     List<Question> findBySessionId(String sessionId);
 
+    List<Question> findBySessionIdAndAnswerIsNotNull(String sessionId);
+
 }

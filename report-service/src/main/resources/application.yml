@@ -1,22 +1,19 @@
 server:
-  port: 8030
+  port: 8032
   error:
     include-stacktrace: always
-
-spring:
-  data:
-    mongodb:
-      database: soschitaika
-      uri: mongodb://localhost
 
 management:
   endpoints:
     web:
       exposure:
-        include: metrics,health
+        include: metrics,health,logfile
   endpoint:
     health:
       show-details: always
+
+jasper:
+  template: reportTemplates/gameReport.jrxml
 
 logging:
   level:
