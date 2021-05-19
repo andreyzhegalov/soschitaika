@@ -34,11 +34,19 @@ public class ReportServiceJasperReports implements ReportService<JasperPrint, Li
         final var params = new HashMap();
         params.put("datasource", ds);
 
+        params.put("result", makeResult(data));
+
         try {
             return JasperFillManager.fillReport(jasperReport, params, new JREmptyDataSource());
         } catch (JRException e) {
             throw new ReportServiceException(e);
         }
+    }
+
+    private String makeResult(List<ReportItemDto> data) {
+        final var correctAnswer = data.stream().filter(item -> item.isCorrect()).count();
+        final var total = data.size();
+        return String.format("Correct %d of %d", correctAnswer, total);
     }
 
     @Override

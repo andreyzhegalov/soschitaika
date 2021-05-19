@@ -12,7 +12,13 @@ public class TestHelper {
         item1.setQuestion("question1");
         item1.setCorrectAnswer("answer1");
         item1.setCorrect(true);
-        return List.of(item1);
+
+        final var item2 = new ReportItemDto();
+        item2.setAnswer("answer2");
+        item2.setQuestion("question2");
+        item2.setCorrectAnswer("answer1");
+        item2.setCorrect(false);
+        return List.of(item1, item2);
     }
 
 }
