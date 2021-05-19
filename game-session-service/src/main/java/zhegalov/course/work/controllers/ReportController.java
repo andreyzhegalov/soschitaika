@@ -1,5 +1,6 @@
 package zhegalov.course.work.controllers;
 
+import org.bouncycastle.util.Strings;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,8 +18,9 @@ public class ReportController {
 
     @PostMapping("/api/reports")
     @ResponseStatus(HttpStatus.CREATED)
-    public byte[] createReport(@RequestBody SessionDto session) {
-        return reportService.createReport(session.getSessionId());
+    public String createReport(@RequestBody SessionDto session) {
+        final var ba = reportService.createReport(session.getSessionId());
+        return Strings.fromByteArray(ba);
     }
 
 }

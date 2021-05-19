@@ -1,6 +1,7 @@
 package zhegalov.course.work.controllers;
 
 import static org.mockito.BDDMockito.then;
+import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -27,6 +28,7 @@ public class ReportControllerTest {
     @Test
     void shouldCreateReportWhenReportRequested() throws Exception {
         final var jsonString = "{\"sessionId\": \"sessionId\"}";
+        given(reportService.createReport("sessionId")).willReturn(new byte[0]);
         mvc.perform(
                 post("/api/reports").content(jsonString).header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON))
                 .andDo(print()).andExpect(status().isCreated());

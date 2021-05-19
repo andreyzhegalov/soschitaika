@@ -43,7 +43,7 @@ public class ReportServiceJasperReports implements ReportService<JasperPrint, Li
     }
 
     private String makeResult(List<ReportItemDto> data) {
-        final var correctAnswer = data.stream().filter(item -> item.isCorrect()).count();
+        final var correctAnswer = data.stream().filter(ReportItemDto::isCorrect).count();
         final var total = data.size();
         return String.format("Correct %d of %d", correctAnswer, total);
     }

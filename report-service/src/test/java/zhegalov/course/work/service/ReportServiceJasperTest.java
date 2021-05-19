@@ -2,7 +2,6 @@ package zhegalov.course.work.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 
@@ -29,10 +28,5 @@ public class ReportServiceJasperTest {
 
         final var byteArray = reportService.print(report);
         assertThat(byteArray).isNotNull();
-
-
-        try (final var fos = new FileOutputStream("report.pdf")) {
-            fos.write(byteArray);
-        }
     }
 }
