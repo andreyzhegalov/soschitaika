@@ -1,6 +1,5 @@
 package zhegalov.course.work.service;
 
-import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
 import java.util.List;
 
@@ -15,7 +14,7 @@ import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.export.Exporter;
 import net.sf.jasperreports.export.SimpleExporterInput;
-import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
+import zhegalov.course.work.configuration.ByteArrayWrapper;
 import zhegalov.course.work.controllers.dto.ReportItemDto;
 
 @SuppressWarnings("rawtypes")
@@ -24,6 +23,7 @@ import zhegalov.course.work.controllers.dto.ReportItemDto;
 public class ReportServiceJasperReports implements ReportService<JasperPrint, List<ReportItemDto>> {
     private final JasperReport jasperReport;
     private final Exporter exporter;
+    private final ByteArrayWrapper byteArrayWrapper;
 
     @Override
     @SuppressWarnings("unchecked")
@@ -33,7 +33,6 @@ public class ReportServiceJasperReports implements ReportService<JasperPrint, Li
 
         final var params = new HashMap();
         params.put("datasource", ds);
-
         params.put("result", makeResult(data));
 
         try {
@@ -52,14 +51,12 @@ public class ReportServiceJasperReports implements ReportService<JasperPrint, Li
     @Override
     @SuppressWarnings("unchecked")
     public byte[] print(JasperPrint report) {
-        final var baos = new ByteArrayOutputStream();
-        exporter.setExporterOutput(new SimpleOutputStreamExporterOutput(baos));
         exporter.setExporterInput(new SimpleExporterInput(report));
         try {
             exporter.exportReport();
         } catch (JRException e) {
             throw new ReportServiceException(e);
         }
-        return baos.toByteArray();
+        return byteArrayWrapper.getOutputStream().toByteArray();
     }
 }
