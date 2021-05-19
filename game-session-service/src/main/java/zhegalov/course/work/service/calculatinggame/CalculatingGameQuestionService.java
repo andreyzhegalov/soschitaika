@@ -2,7 +2,6 @@ package zhegalov.course.work.service.calculatinggame;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
@@ -17,8 +16,7 @@ import zhegalov.course.work.service.calculatinggame.convertors.GameSettingsConve
 @RequiredArgsConstructor
 @Service
 public class CalculatingGameQuestionService implements QuestionService {
-    @Autowired
-    private ExpressionServiceProxy expressionServiceProxy;
+    private final ExpressionServiceProxy expressionServiceProxy;
     private final QuestionRepository questionRepository;
 
     @Override
