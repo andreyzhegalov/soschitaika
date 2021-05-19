@@ -22,7 +22,7 @@ public class ReportServiceJasperTest {
     private ReportService<JasperPrint, List<ReportItemDto>> reportService;
 
     @Test
-    void shouldPrintReport() throws JRException, IOException {
+    void shouldPrintReport() {
         final var reportItems = TestHelper.createReportItemList();
         final var report = reportService.createReport(reportItems);
 

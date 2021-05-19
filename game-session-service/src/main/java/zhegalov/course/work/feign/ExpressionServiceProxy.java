@@ -14,6 +14,6 @@ public interface ExpressionServiceProxy {
 
     @PostMapping(path = "/api/expressions")
     @ResponseStatus(HttpStatus.CREATED)
-    public ExpressionDto createExpression(@RequestBody GeneratorSetup generatorSetup);
+    ExpressionDto createExpression(@RequestBody GeneratorSetup generatorSetup);
 
 }

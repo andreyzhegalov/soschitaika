@@ -47,5 +47,4 @@ public class ReportControllerTest {
         then(reportService).should().createReport(any());
         then(reportService).should().print(any());
     }
-
 }

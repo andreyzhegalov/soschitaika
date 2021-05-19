@@ -18,7 +18,7 @@
     </subDataset>
 
     <parameter name="datasource" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource" />
-    <parameter name="result"></parameter>
+    <parameter name="result"/>
 
     <detail>
         <band height="250">

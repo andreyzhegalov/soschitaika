@@ -28,7 +28,7 @@ public class ReportServiceTest {
     private Exporter exporter;
 
     @Test
-    void shouldCreateReport() throws JRException {
+    void shouldCreateReport() {
         final var reportItems = TestHelper.createReportItemList();
         assertThat(reportService.createReport(reportItems)).isNotNull();
     }

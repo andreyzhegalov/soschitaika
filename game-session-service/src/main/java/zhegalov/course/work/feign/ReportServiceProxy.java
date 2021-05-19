@@ -15,6 +15,6 @@ public interface ReportServiceProxy {
 
     @PostMapping(path = "/api/reports")
     @ResponseStatus(HttpStatus.CREATED)
-    public byte[] createReport(@RequestBody List<ReportItemDto> question);
+    byte[] createReport(@RequestBody List<ReportItemDto> question);
 
 }
