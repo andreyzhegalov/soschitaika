@@ -10,10 +10,20 @@ import lombok.extern.slf4j.Slf4j;
 public class SomeService {
 
     public Message handler(Message data) {
-        log.debug("!!!!!!!!!!!!!!!!!! SomeService handler with {}", data);
+        log.debug("SomeService handler with {}", data);
         final var message = new Message();
         message.setMessageStr(data.getMessageStr() + " from service handler");
+        sleep(5000);
         return message;
+    }
+
+    private void sleep(long ms) {
+        try {
+            Thread.sleep(ms);
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }
