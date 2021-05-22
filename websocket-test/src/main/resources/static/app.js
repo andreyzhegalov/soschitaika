@@ -32,7 +32,7 @@ const disconnect = () => {
 
 const sendMsg = () =>
   stompClient.send(
-    "/app/message" ,
+    "/app/reports" ,
     {},
     JSON.stringify({ messageStr: $("#message").val() })
   );
