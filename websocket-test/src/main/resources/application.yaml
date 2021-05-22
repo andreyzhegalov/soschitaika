@@ -5,3 +5,4 @@ logging:
   level:
     ROOT: DEBUG
     org.springframework: DEBUG
+    org.springframework.integration: DEBUG
