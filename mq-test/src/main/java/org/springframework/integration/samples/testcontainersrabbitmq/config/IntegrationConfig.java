@@ -5,37 +5,30 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.integration.amqp.dsl.Amqp;
-import org.springframework.integration.annotation.MessagingGateway;
 import org.springframework.integration.dsl.IntegrationFlow;
 import org.springframework.integration.dsl.IntegrationFlows;
-import org.springframework.integration.samples.testcontainersrabbitmq.domain.Request;
-import org.springframework.integration.samples.testcontainersrabbitmq.domain.Response;
 
 @Configuration
 public class IntegrationConfig {
 
-    @MessagingGateway(defaultRequestChannel = "request.input")
-    public interface MyGateway {
-
-        Response sendToRabbit(Request data);
-
-    }
     @Bean
-    public IntegrationFlow amqpInbound(ConnectionFactory connectionFactory) {
-        return IntegrationFlows.from(Amqp.inboundAdapter(connectionFactory, "aName"))
+    public IntegrationFlow requestFlow(ConnectionFactory connectionFactory) {
+        // @formatter:on
+        return IntegrationFlows.from(Amqp.inboundAdapter(connectionFactory, "dataForReport"))
                 .handle("someService", "handleMessage")
-                .channel("request.input")
+                .channel("responseFlow.input")
                 .get();
+        // @formatter:off
     }
 
     @Bean
-    public IntegrationFlow request(RabbitTemplate amqpTemplate) {
+    public IntegrationFlow responseFlow(RabbitTemplate amqpTemplate) {
         // @formatter:off
         return f -> f
             .log()
             // .transform(Transformers.toJson())
             .handle(Amqp.outboundAdapter(amqpTemplate)
-            .routingKey("request")
+            .routingKey("resultReport")
             );
         // @formatter:on
     }
