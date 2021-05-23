@@ -12,11 +12,11 @@ import zhegalov.course.work.controllers.dto.SessionDto;
 import zhegalov.course.work.service.ReportService;
 
 @RequiredArgsConstructor
-@RestController
+// @RestController
 public class ReportController {
     private final ReportService reportService;
 
-    @PostMapping("/api/reports")
+    // @PostMapping("/api/reports")
     @ResponseStatus(HttpStatus.CREATED)
     public String createReport(@RequestBody SessionDto session) {
         final var ba = reportService.createReport(session.getSessionId());

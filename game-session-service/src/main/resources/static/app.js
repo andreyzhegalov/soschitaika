@@ -34,7 +34,7 @@ const sendMsg = () =>
   stompClient.send(
     "/app/reports" ,
     {},
-    JSON.stringify({ messageStr: $("#message").val() })
+    JSON.stringify({ sessionId: $("#sessionId").val() })
   );
 
 const showGreeting = (messageStr) =>

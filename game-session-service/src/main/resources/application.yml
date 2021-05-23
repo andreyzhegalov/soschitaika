@@ -4,6 +4,12 @@ server:
     include-stacktrace: always
 
 spring:
+  rabbitmq:
+    host: 172.17.0.7
+    port: 5672
+    username: guest
+    password: guest
+    virtual-host: /
   data:
     mongodb:
       database: soschitaika
