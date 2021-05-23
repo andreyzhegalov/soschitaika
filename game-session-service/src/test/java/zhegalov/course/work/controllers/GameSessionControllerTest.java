@@ -1,8 +1,8 @@
 package zhegalov.course.work.controllers;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.BDDMockito.then;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.then;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -13,6 +13,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpHeaders;
@@ -25,6 +26,7 @@ import zhegalov.course.work.model.gamesettings.CalculationOperation;
 import zhegalov.course.work.service.GameSessionService;
 
 @WebMvcTest(controllers = GameSessionController.class)
+@AutoConfigureMockMvc(addFilters = false)
 public class GameSessionControllerTest {
     @MockBean
     private GameSessionService  sessionService;
