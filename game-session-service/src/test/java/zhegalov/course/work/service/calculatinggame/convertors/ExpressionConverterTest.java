@@ -4,13 +4,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
 
-import zhegalov.course.work.feign.dto.ExpressionDto;
+import zhegalov.course.work.controllers.dto.ExpressionDto;
+
 
 public class ExpressionConverterTest {
 
     @Test
     void shouldConvertToQuestion() {
-        ExpressionDto expression = new ExpressionDto();
+        final var expression = new ExpressionDto();
         expression.setExpression("1+1");
         expression.setResult(2);
 
