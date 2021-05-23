@@ -1,0 +1,17 @@
+server:
+  port: 8081
+
+spring:
+  rabbitmq:
+    host: 172.17.0.7
+    port: 5672
+    username: guest
+    password: guest
+    virtual-host: /
+
+logging:
+  level:
+    ROOT: DEBUG
+    org.springframework: DEBUG
+    org.springframework.integration.amqp: DEBUG
+    org.springframework.integration: DEBUG

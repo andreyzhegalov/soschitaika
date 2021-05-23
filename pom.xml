@@ -33,6 +33,7 @@
         <module>game-session-service</module>
         <module>report-service</module>
         <module>websocket-test</module>
+        <module>mq-test</module>
     </modules>
 
     <build>
