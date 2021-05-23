@@ -28,7 +28,6 @@ public class ReportServiceJasperReports implements ReportService<JasperPrint, Li
     @Override
     @SuppressWarnings("unchecked")
     public JasperPrint createReport(List<ReportItemDto> data) {
-
         final var ds = new JRBeanCollectionDataSource(data);
 
         final var params = new HashMap();
