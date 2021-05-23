@@ -56,9 +56,11 @@ public class IntegrationConfig {
     @Bean
     public IntegrationFlow responseReportFlow(ConnectionFactory connectionFactory) {
         // @formatter:on
-        return IntegrationFlows.from(Amqp.inboundAdapter(connectionFactory, "resultReport"))
-                .channel("reportChannel")
-                .get();
+        return IntegrationFlows
+            .from(Amqp.inboundAdapter(connectionFactory, "resultReport"))
+            .log()
+            .channel("reportChannel")
+            .get();
         // @formatter:off
     }
 

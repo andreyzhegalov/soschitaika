@@ -32,8 +32,8 @@ public class ReportServiceImpl implements ReportService {
         return questionList.stream().map(QuestionConverter::convertToReportItem).collect(Collectors.toList());
     }
 
-	@Override
-	public List<ReportItemDto> createReportData(SessionDto sessionDto) {
+    @Override
+    public List<ReportItemDto> createReportData(SessionDto sessionDto) {
         log.debug("Create report data request for {} sessionId", sessionDto.getSessionId());
 
         final var item1 = new ReportItemDto();
@@ -48,5 +48,5 @@ public class ReportServiceImpl implements ReportService {
         item2.setCorrectAnswer("answer1");
         item2.setCorrect(false);
         return List.of(item1, item2);
-	}
+    }
 }
