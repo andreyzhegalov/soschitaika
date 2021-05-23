@@ -9,13 +9,14 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @EnableWebSecurity
 public class SecurityConfig {
+
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             .authorizeRequests(authorizeRequests ->
                 authorizeRequests
-                .antMatchers("/api/reports").permitAll()
-                .anyRequest().authenticated()
+               .antMatchers("/**.html", "/**.js", "/webjars/**", "/**.css", "/endpoint/**").permitAll()
+               .anyRequest().authenticated()
             )
             .oauth2Login(oauth2Login ->
                 oauth2Login.loginPage("/oauth2/authorization/expression-client-oidc"))
