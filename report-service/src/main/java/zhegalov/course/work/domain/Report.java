@@ -1,5 +1,6 @@
 package zhegalov.course.work.domain;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
