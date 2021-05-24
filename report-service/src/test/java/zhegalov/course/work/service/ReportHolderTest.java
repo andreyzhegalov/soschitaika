@@ -25,6 +25,6 @@ public class ReportHolderTest {
         final var report = new Report("report data".getBytes());
         final var reportId = reportHolderService.saveReport(report);
         final var savedReport = reportHolderService.getReport(reportId);
-        assertThat(savedReport).isSameAs(report);
+        assertThat(savedReport.getData()).isEqualTo(report.getData());
     }
 }

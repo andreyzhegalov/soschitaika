@@ -34,8 +34,9 @@ public class ReportController {
 
     @GetMapping(path = "/api/reports/{reportId}")
     @ResponseStatus(HttpStatus.OK)
-    public byte[] getReport(@PathVariable("reportId") String reportId) {
-        return reportHolderService.getReport(reportId).getData();
+    public String getReport(@PathVariable("reportId") String reportId) {
+        final var report = reportHolderService.getReport(reportId);
+        return new String(report.getData());
     }
 
 }
