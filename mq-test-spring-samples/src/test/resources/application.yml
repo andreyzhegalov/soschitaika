@@ -1,11 +1,15 @@
-logging.level:
-  org.springframework.integration: DEBUG
-  com.playtika.test: DEBUG
+logging:
+  level:
+    ROOT: DEBUG
+    org.springframework: DEBUG
+    org.springframework.integration: DEBUG
+    org.springframework.web.socket: DEBUG
+    org.springframework.amqp: DEBUG
 
 spring:
   rabbitmq:
-    host: ${embedded.rabbitmq.host}
-    port: ${embedded.rabbitmq.port}
-    username: ${embedded.rabbitmq.user}
-    password: ${embedded.rabbitmq.password}
-    virtual-host: ${embedded.rabbitmq.vhost}
+    host: 172.17.0.7
+    port: 5672
+    username: guest
+    password: guest
+    virtual-host: /

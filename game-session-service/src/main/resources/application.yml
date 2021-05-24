@@ -48,4 +48,5 @@ logging:
     org.springframework: DEBUG
     org.springframework.security.oauth2: DEBUG
     org.springframework.integration: DEBUG
+    org.springframework.web.socket: DEBUG
 

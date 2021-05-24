@@ -25,5 +25,7 @@ jasper:
 
 logging:
   level:
-    ROOT: INFO
-    org.springframework: INFO
+    ROOT: DEBUG
+    org.springframework: DEBUG
+    org.springframework.integration: DEBUG
+    org.springframework.web.socket: DEBUG

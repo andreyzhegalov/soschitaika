@@ -17,7 +17,7 @@ const connect = () => {
     setConnected(true);
     console.log("Connected: " + frame);
     stompClient.subscribe("/topic/response", (greeting) =>
-      showGreeting(JSON.parse(greeting.body).messageStr)
+      showGreeting(JSON.parse(greeting.body).reportId)
     );
   });
 };

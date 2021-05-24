@@ -1,4 +1,4 @@
-package zhegalov.course.work.domain.dto;
+package zhegalov.course.work.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -48,8 +48,8 @@ public class Receiver {
 			)
 	)
 	@SendTo("downstream.results")
-	public Response handleMessage(Request request) {
-		log.info("handleMessage : received message [{}]", request);
+	public Response handleMessage(Request request) throws InterruptedException {
+		log.info("!!!!!!!!!!!!!!!!!!!! handleMessage : received message [{}]", request);
 
 		Integer messageId;
 		if (null != request.getMessageId()) {
