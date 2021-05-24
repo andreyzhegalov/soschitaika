@@ -3,6 +3,8 @@ package zhegalov.course.work.controllers;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -12,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.sf.jasperreports.engine.JasperPrint;
 import zhegalov.course.work.controllers.dto.ReportItemDto;
+import zhegalov.course.work.service.ReportHolderService;
 import zhegalov.course.work.service.ReportService;
 
 @RequiredArgsConstructor
@@ -19,6 +22,7 @@ import zhegalov.course.work.service.ReportService;
 @Slf4j
 public class ReportController {
     private final ReportService<JasperPrint, List<ReportItemDto>> reportService;
+    private final ReportHolderService reportHolderService;
 
     @PostMapping(path = "/api/reports")
     @ResponseStatus(HttpStatus.CREATED)
@@ -26,6 +30,12 @@ public class ReportController {
         log.debug("Received: \n {}", questions);
         final var report = reportService.createReport(questions);
         return reportService.print(report);
+    }
+
+    @GetMapping(path = "/api/reports/{reportId}")
+    @ResponseStatus(HttpStatus.OK)
+    public byte[] getReport(@PathVariable("reportId") String reportId) {
+        return reportHolderService.getReport(reportId).getData();
     }
 
 }

@@ -13,15 +13,15 @@ public class ReportHolderServiceImpl implements ReportHolderService {
     private final Map<UUID, Report> reportMap = new HashMap<>();
 
     @Override
-    public UUID saveReport(Report report) {
+    public String saveReport(Report report) {
         final var reportId = UUID.randomUUID();
         reportMap.put(reportId, report);
-        return reportId;
+        return reportId.toString();
     }
 
     @Override
-    public Report getReport(UUID reportId) {
-        return reportMap.getOrDefault(reportId, new Report(new byte[0]));
+    public Report getReport(String reportId) {
+        return reportMap.getOrDefault(UUID.fromString(reportId), new Report(new byte[0]));
     }
 
 }
