@@ -13,8 +13,6 @@ import org.springframework.integration.dsl.IntegrationFlows;
 import org.springframework.integration.dsl.Transformers;
 import org.springframework.messaging.handler.annotation.SendTo;
 
-import zhegalov.course.work.controllers.dto.ReportItemDto;
-
 @Configuration
 public class IntegrationConfig {
 
@@ -25,7 +23,7 @@ public class IntegrationConfig {
         // @formatter:on
         return IntegrationFlows.from(Amqp.inboundGateway(connectionFactory, "downstream.request"))
                 .log()
-                .handle("reportManagerServiceImpl", "prepareReportFake")
+                .handle("reportManagerServiceImpl", "prepareReport")
                 .transform(Transformers.toJson())
                 .get();
         // @formatter:off

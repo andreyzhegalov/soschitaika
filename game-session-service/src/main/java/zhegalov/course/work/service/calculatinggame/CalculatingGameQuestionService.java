@@ -50,4 +50,9 @@ public class CalculatingGameQuestionService implements QuestionService {
         this.authorizedClient = authorizedClient;
     }
 
+    @Override
+    public List<Question> getQuestionsWithAnswer(GameSession session) {
+        return questionRepository.findBySessionIdAndAnswerIsNotNull(session.getId());
+    }
+
 }

@@ -15,6 +15,8 @@ public interface QuestionService {
 
     List<Question> getQuestions(GameSession session);
 
+    List<Question> getQuestionsWithAnswer(GameSession session);
+
     void setOAuth2AuthorizedClient(OAuth2AuthorizedClient authorizedClient);
 
 }

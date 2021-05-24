@@ -1,16 +1,7 @@
 package zhegalov.course.work.config;
 
-import javax.swing.TransferHandler.TransferSupport;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import org.bouncycastle.util.Strings;
-import org.springframework.amqp.core.Binding;
-import org.springframework.amqp.core.BindingBuilder;
-import org.springframework.amqp.core.ExchangeBuilder;
-import org.springframework.amqp.core.Queue;
-import org.springframework.amqp.core.QueueBuilder;
-import org.springframework.amqp.core.TopicExchange;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.amqp.support.converter.MessageConverter;
@@ -22,10 +13,8 @@ import org.springframework.integration.annotation.MessagingGateway;
 import org.springframework.integration.channel.DirectChannel;
 import org.springframework.integration.dsl.IntegrationFlow;
 import org.springframework.integration.dsl.Transformers;
-import org.springframework.messaging.Message;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
-import org.springframework.messaging.support.GenericMessage;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -49,10 +38,7 @@ public class IntegrationConfig {
     @Bean
     public IntegrationFlow prepareDataFlow() {
         // @formatter:on
-        return f -> f
-            .log()
-            .handle("reportServiceImpl", "createReportData")
-            .channel("requestReportFlow.input");
+        return f -> f.log().handle("reportServiceImpl", "createReportData").channel("requestReportFlow.input");
         // @formatter:off
     }
 
@@ -73,40 +59,8 @@ public class IntegrationConfig {
         // @formatter:on
     }
 
-	@Bean
-	public MessageConverter jsonMessageConverter(ObjectMapper objectMapper) {
-		return new Jackson2JsonMessageConverter(objectMapper);
-	}
-
-
-		// public static final String TOPIC_EXCHANGE = "downstream";
-        //
-		// public static final String RESULTS_QUEUE = "downstream.results";
-        //
-		// public static final String RESULTS_ROUTING_KEY = "downstream.results.#";
-        //
-		// @Bean
-		// TopicExchange topicExchange() {
-        //
-		//     return ExchangeBuilder
-		//             .topicExchange(TOPIC_EXCHANGE)
-		//             .build();
-		// }
-        //
-		// @Bean
-		// Queue resultsQueue() {
-        //
-		//     return QueueBuilder
-		//             .nonDurable(RESULTS_QUEUE)
-		//             .build();
-		// }
-        //
-		// @Bean
-		// Binding resultsBinding(TopicExchange topicExchange, Queue resultsQueue) {
-        //
-		//     return BindingBuilder.bind(resultsQueue)
-		//             .to(topicExchange)
-		//             .with(RESULTS_ROUTING_KEY);
-		// }
-
+    @Bean
+    public MessageConverter jsonMessageConverter(ObjectMapper objectMapper) {
+        return new Jackson2JsonMessageConverter(objectMapper);
+    }
 }

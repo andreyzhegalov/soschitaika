@@ -7,8 +7,6 @@ import zhegalov.course.work.feign.dto.ReportItemDto;
 
 public interface ReportService {
 
-    byte[] createReport(String sessionId);
-
     List<ReportItemDto> createReportData(SessionDto sessionDto);
 
 }

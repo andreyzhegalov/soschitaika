@@ -84,4 +84,15 @@ public class CalculatingGameQuestionServiceTest {
         then(questionRepository).should().findBySessionId(eq(sessionId));
     }
 
+    @Test
+    void shouldGetAllQuestionWithAnswer(){
+        GameSession session = new GameSession();
+        final var sessionId = "123";
+        session.setId(sessionId);
+
+        questionService.getQuestionsWithAnswer(session);
+
+        then(questionRepository).should().findBySessionIdAndAnswerIsNotNull(eq(sessionId));
+    }
+
 }
