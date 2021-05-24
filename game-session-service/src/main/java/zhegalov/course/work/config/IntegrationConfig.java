@@ -46,20 +46,12 @@ public class IntegrationConfig {
 
     }
 
-    // @Bean
-    // public IntegrationFlow flow() {
-    //     return f -> f
-    //     .handle("someService", "handler")
-    //     .channel("reportChannel");
-    // }
-
     @Bean
     public IntegrationFlow prepareDataFlow() {
         // @formatter:on
         return f -> f
             .log()
             .handle("reportServiceImpl", "createReportData")
-            // .transform(Transformers.toJson())
             .channel("requestReportFlow.input");
         // @formatter:off
     }
@@ -78,14 +70,6 @@ public class IntegrationConfig {
 						.exchangeName("downstream")
 						.routingKey("downstream.request"))
             .transform(Transformers.fromJson(ReportDto.class));
-            // .transform(m -> {
-            //     final var mapper = new ObjectMapper();
-            //     try {
-            //         return mapper.readValue((String)m, ReportDto.class);
-            //     } catch (Exception e) {
-            //         throw new RuntimeException(e);
-            //     }
-            // });
         // @formatter:on
     }
 
@@ -95,46 +79,34 @@ public class IntegrationConfig {
 	}
 
 
-		public static final String TOPIC_EXCHANGE = "downstream";
-
-		public static final String RESULTS_QUEUE = "downstream.results";
-
-		public static final String RESULTS_ROUTING_KEY = "downstream.results.#";
-
-		@Bean
-		TopicExchange topicExchange() {
-
-			return ExchangeBuilder
-					.topicExchange(TOPIC_EXCHANGE)
-					.build();
-		}
-
-		@Bean
-		Queue resultsQueue() {
-
-			return QueueBuilder
-					.nonDurable(RESULTS_QUEUE)
-					.build();
-		}
-
-		@Bean
-		Binding resultsBinding(TopicExchange topicExchange, Queue resultsQueue) {
-
-			return BindingBuilder.bind(resultsQueue)
-					.to(topicExchange)
-					.with(RESULTS_ROUTING_KEY);
-		}
-
-
-    // @Bean
-    // public IntegrationFlow responseReportFlow(ConnectionFactory connectionFactory,  SimpMessagingTemplate simpMessagingTemplate) {
-    //     // @formatter:on
-    //     return IntegrationFlows
-    //         .from(Amqp.inboundAdapter(connectionFactory, "resultReport"))
-    //         .log()
-    //         .handle("wsReply", "reply" )
-    //         .get();
-    //     // @formatter:off
-    // }
+		// public static final String TOPIC_EXCHANGE = "downstream";
+        //
+		// public static final String RESULTS_QUEUE = "downstream.results";
+        //
+		// public static final String RESULTS_ROUTING_KEY = "downstream.results.#";
+        //
+		// @Bean
+		// TopicExchange topicExchange() {
+        //
+		//     return ExchangeBuilder
+		//             .topicExchange(TOPIC_EXCHANGE)
+		//             .build();
+		// }
+        //
+		// @Bean
+		// Queue resultsQueue() {
+        //
+		//     return QueueBuilder
+		//             .nonDurable(RESULTS_QUEUE)
+		//             .build();
+		// }
+        //
+		// @Bean
+		// Binding resultsBinding(TopicExchange topicExchange, Queue resultsQueue) {
+        //
+		//     return BindingBuilder.bind(resultsQueue)
+		//             .to(topicExchange)
+		//             .with(RESULTS_ROUTING_KEY);
+		// }
 
 }

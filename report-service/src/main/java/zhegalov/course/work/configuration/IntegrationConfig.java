@@ -25,10 +25,8 @@ public class IntegrationConfig {
         // @formatter:on
         return IntegrationFlows.from(Amqp.inboundGateway(connectionFactory, "downstream.request"))
                 .log()
-                // .transform(Transformers.fromJson(ReportItemDto[].class))
                 .handle("reportManagerServiceImpl", "prepareReportFake")
                 .transform(Transformers.toJson())
-                // .channel("responseFlow.input")
                 .get();
         // @formatter:off
     }
@@ -37,28 +35,4 @@ public class IntegrationConfig {
     public MessageConverter jsonMessageConverter(ObjectMapper objectMapper) {
         return new Jackson2JsonMessageConverter(objectMapper);
     }
-
-    // @Bean
-    // public IntegrationFlow requestFlow(ConnectionFactory connectionFactory) {
-    //     // @formatter:on
-    //     return IntegrationFlows.from(Amqp.inboundAdapter(connectionFactory, "dataForReport"))
-    //             .log()
-    //             .transform(Transformers.fromJson(ReportItemDto[].class))
-    //             .handle("reportManagerServiceImpl", "prepareReport")
-    //             .channel("responseFlow.input")
-    //             .get();
-    //     // @formatter:off
-    // }
-    //
-    // @Bean
-    // public IntegrationFlow responseFlow(RabbitTemplate amqpTemplate) {
-    //     // @formatter:off
-    //     return f -> f
-    //         .log()
-    //         .transform(Transformers.toJson())
-    //         .handle(Amqp.outboundAdapter(amqpTemplate)
-    //         .routingKey("resultReport")
-    //         );
-    //     // @formatter:on
-    // }
 }
