@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import zhegalov.course.work.controllers.dto.SessionDto;
-import zhegalov.course.work.feign.dto.ReportItemDto;
+import zhegalov.course.work.dto.SessionDto;
+import zhegalov.course.work.dto.ReportItemDto;
 import zhegalov.course.work.model.GameSession;
 import zhegalov.course.work.model.Question;
 import zhegalov.course.work.service.convertors.QuestionConverter;

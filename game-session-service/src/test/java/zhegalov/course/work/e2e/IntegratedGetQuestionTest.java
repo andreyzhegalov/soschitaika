@@ -21,7 +21,7 @@ import org.springframework.boot.autoconfigure.mongo.embedded.EmbeddedMongoAutoCo
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Configuration;
 
-import zhegalov.course.work.controllers.dto.AnswerDto;
+import zhegalov.course.work.dto.AnswerDto;
 
 @Disabled
 @SpringBootTest

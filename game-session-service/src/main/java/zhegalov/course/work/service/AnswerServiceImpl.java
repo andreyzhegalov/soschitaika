@@ -3,7 +3,7 @@ package zhegalov.course.work.service;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
-import zhegalov.course.work.controllers.dto.AnswerDto;
+import zhegalov.course.work.dto.AnswerDto;
 import zhegalov.course.work.model.Question;
 import zhegalov.course.work.respositories.QuestionRepository;
 

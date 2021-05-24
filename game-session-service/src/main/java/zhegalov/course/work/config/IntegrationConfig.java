@@ -18,7 +18,7 @@ import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import zhegalov.course.work.controllers.dto.SessionDto;
+import zhegalov.course.work.dto.SessionDto;
 import zhegalov.course.work.dto.ReportDto;
 
 @Configuration
@@ -37,9 +37,12 @@ public class IntegrationConfig {
 
     @Bean
     public IntegrationFlow prepareDataFlow() {
-        // @formatter:on
-        return f -> f.log().handle("reportServiceImpl", "createReportData").channel("requestReportFlow.input");
         // @formatter:off
+        return f -> f
+            .log()
+            .handle("reportServiceImpl", "createReportData")
+            .channel("requestReportFlow.input");
+        // @formatter:on
     }
 
     @Bean

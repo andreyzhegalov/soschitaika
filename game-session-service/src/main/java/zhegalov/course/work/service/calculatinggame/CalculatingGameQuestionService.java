@@ -6,7 +6,7 @@ import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
-import zhegalov.course.work.feign.ExpressionServiceProxy;
+import zhegalov.course.work.feign.ExpressionService;
 import zhegalov.course.work.model.GameSession;
 import zhegalov.course.work.model.Question;
 import zhegalov.course.work.respositories.QuestionRepository;
@@ -18,7 +18,7 @@ import zhegalov.course.work.service.calculatinggame.convertors.GameSettingsConve
 @Service
 public class CalculatingGameQuestionService implements QuestionService {
     private final QuestionRepository questionRepository;
-    private final ExpressionServiceProxy expressionService;
+    private final ExpressionService expressionService;
     private OAuth2AuthorizedClient authorizedClient;
 
     @Override

@@ -15,8 +15,8 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
-import zhegalov.course.work.controllers.dto.ExpressionDto;
-import zhegalov.course.work.feign.ExpressionServiceProxy;
+import zhegalov.course.work.dto.ExpressionDto;
+import zhegalov.course.work.feign.ExpressionService;
 import zhegalov.course.work.model.GameSession;
 import zhegalov.course.work.model.Question;
 import zhegalov.course.work.model.gamesettings.CalculatingGameSettings;
@@ -35,7 +35,7 @@ public class CalculatingGameQuestionServiceTest {
     private QuestionService questionService;
 
     @MockBean
-    private ExpressionServiceProxy expressionService;
+    private ExpressionService expressionService;
 
     @MockBean
     private QuestionRepository questionRepository;

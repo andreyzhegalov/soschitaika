@@ -6,7 +6,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import zhegalov.course.work.controllers.dto.ExpressionOperation;
+import zhegalov.course.work.dto.ExpressionOperation;
 import zhegalov.course.work.model.gamesettings.CalculatingGameSettings;
 import zhegalov.course.work.model.gamesettings.CalculationOperation;
 

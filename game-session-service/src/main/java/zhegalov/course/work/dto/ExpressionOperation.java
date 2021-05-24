@@ -1,4 +1,4 @@
-package zhegalov.course.work.controllers.dto;
+package zhegalov.course.work.dto;
 
 public enum ExpressionOperation {
     UNDEFINED, SUM, SUB, MUL, DIV

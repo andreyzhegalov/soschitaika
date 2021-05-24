@@ -19,7 +19,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 
-import zhegalov.course.work.controllers.dto.AnswerDto;
+import zhegalov.course.work.dto.AnswerDto;
 import zhegalov.course.work.service.AnswerService;
 import zhegalov.course.work.service.GameServiceException;
 

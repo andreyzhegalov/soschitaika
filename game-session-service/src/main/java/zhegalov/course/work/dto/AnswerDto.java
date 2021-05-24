@@ -5,9 +5,7 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @Data
-public class Message {
-
-    private String messageStr;
-
+public class AnswerDto {
+    private String questionId;
+    private String answer;
 }
-

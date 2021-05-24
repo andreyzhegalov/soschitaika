@@ -9,12 +9,12 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Mono;
-import zhegalov.course.work.controllers.dto.ExpressionDto;
-import zhegalov.course.work.controllers.dto.GeneratorSetup;
+import zhegalov.course.work.dto.ExpressionDto;
+import zhegalov.course.work.dto.GeneratorSetup;
 
 @Service
 @RequiredArgsConstructor
-public class ExpressionServiceProxyImpl implements ExpressionServiceProxy {
+public class ExpressionServiceImpl implements ExpressionService {
     private static final String EXPRESSION_URI = "/api/expressions";
 
     private final WebClient webClient;
