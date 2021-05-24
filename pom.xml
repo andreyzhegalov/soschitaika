@@ -32,9 +32,6 @@
         <module>expression-service</module>
         <module>game-session-service</module>
         <module>report-service</module>
-        <module>websocket-test</module>
-        <module>mq-test</module>
-        <module>mq-test-spring-samples</module>
     </modules>
 
     <build>
