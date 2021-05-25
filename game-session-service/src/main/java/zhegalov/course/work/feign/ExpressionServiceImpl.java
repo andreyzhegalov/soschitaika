@@ -3,7 +3,10 @@ package zhegalov.course.work.feign;
 import static org.springframework.security.oauth2.client.web.reactive.function.client.ServletOAuth2AuthorizedClientExchangeFilterFunction.oauth2AuthorizedClient;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.client.OAuth2AuthorizeRequest;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
+import org.springframework.security.oauth2.client.OAuth2AuthorizedClientManager;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -22,10 +25,19 @@ public class ExpressionServiceImpl implements ExpressionService {
     @Value("${expression.base-uri}")
     private String expressionServiceBaseUri;
 
-    private OAuth2AuthorizedClient authorizedClient;
+    // private OAuth2AuthorizedClient authorizedClient;
+
+    private final OAuth2AuthorizedClientManager authorizedClientManager;
 
     @Override
     public ExpressionDto createExpression(GeneratorSetup generatorSetup) {
+        final var authentication = SecurityContextHolder.getContext().getAuthentication();
+        OAuth2AuthorizeRequest authorizeRequest = OAuth2AuthorizeRequest.withClientRegistrationId("expression-client-oidc")
+                                                                        .principal(authentication)
+                                                                        .build();
+        OAuth2AuthorizedClient authorizedClient = this.authorizedClientManager.authorize(authorizeRequest);
+
+        // final var authClientMap = ((InMemoryOAuth2AuthorizedClientService) ((AuthenticatedPrincipalOAuth2AuthorizedClientRepository) ((DefaultOAuth2AuthorizedClientManager) authorizedClientManager).authorizedClientRepository).authorizedClientService).authorizedClients;
         return this.webClient.post().uri(expressionServiceBaseUri + EXPRESSION_URI)
                 .attributes(oauth2AuthorizedClient(authorizedClient))
                 .body(Mono.just(generatorSetup), GeneratorSetup.class)
@@ -36,6 +48,6 @@ public class ExpressionServiceImpl implements ExpressionService {
 
     @Override
     public void setOAuth2AuthorizedClient(OAuth2AuthorizedClient authorizedClient) {
-        this.authorizedClient = authorizedClient;
+        // this.authorizedClient = authorizedClient;
     }
 }
