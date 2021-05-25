@@ -48,6 +48,8 @@ public class ExpressionGeneratorServiceImpl implements ExpressionGeneratorServic
         final var expression = create(generatorSetup);
         expressionDto.setExpression(printService.print(expression));
         expressionDto.setResult(expression.getResult());
+        expressionDto.setOperation(expression.getOperation());
+        expressionDto.setValues(expression.getValues());
         return expressionDto;
     }
 }
