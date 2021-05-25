@@ -4,7 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
 
-import zhegalov.course.work.controllers.dto.ExpressionDto;
+import zhegalov.course.work.dto.ExpressionDto;
 
 
 public class ExpressionConverterTest {

@@ -1,4 +1,4 @@
-package zhegalov.course.work.controllers.dto;
+package zhegalov.course.work.dto;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

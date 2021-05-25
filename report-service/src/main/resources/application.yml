@@ -3,6 +3,14 @@ server:
   error:
     include-stacktrace: always
 
+spring:
+  rabbitmq:
+    host: 172.17.0.7
+    port: 5672
+    username: guest
+    password: guest
+    virtual-host: /
+
 management:
   endpoints:
     web:
@@ -19,3 +27,5 @@ logging:
   level:
     ROOT: INFO
     org.springframework: INFO
+    org.springframework.integration: INFO
+    org.springframework.web.socket: INFO

@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import zhegalov.course.work.controllers.dto.ExpressionOperation;
-import zhegalov.course.work.controllers.dto.GeneratorSetup;
+import zhegalov.course.work.dto.ExpressionOperation;
+import zhegalov.course.work.dto.GeneratorSetup;
 import zhegalov.course.work.model.GameSettings;
 import zhegalov.course.work.model.gamesettings.CalculatingGameSettings;
 import zhegalov.course.work.model.gamesettings.CalculationOperation;

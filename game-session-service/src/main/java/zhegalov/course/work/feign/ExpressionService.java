@@ -2,10 +2,10 @@ package zhegalov.course.work.feign;
 
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
 
-import zhegalov.course.work.controllers.dto.ExpressionDto;
-import zhegalov.course.work.controllers.dto.GeneratorSetup;
+import zhegalov.course.work.dto.ExpressionDto;
+import zhegalov.course.work.dto.GeneratorSetup;
 
-public interface ExpressionServiceProxy {
+public interface ExpressionService {
 
     ExpressionDto createExpression(GeneratorSetup generatorSetup);
 

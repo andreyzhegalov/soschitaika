@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
-import zhegalov.course.work.controllers.dto.AnswerDto;
+import zhegalov.course.work.dto.AnswerDto;
 import zhegalov.course.work.service.AnswerService;
 import zhegalov.course.work.service.GameServiceException;
 

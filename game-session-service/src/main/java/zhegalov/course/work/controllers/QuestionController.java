@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import lombok.RequiredArgsConstructor;
-import zhegalov.course.work.controllers.dto.QuestionDto;
-import zhegalov.course.work.controllers.dto.SessionDto;
+import zhegalov.course.work.dto.QuestionDto;
+import zhegalov.course.work.dto.SessionDto;
 import zhegalov.course.work.service.GameSessionService;
 import zhegalov.course.work.service.QuestionService;
 

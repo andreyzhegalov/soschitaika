@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
-import zhegalov.course.work.controllers.dto.SessionDto;
+import zhegalov.course.work.dto.SessionDto;
 import zhegalov.course.work.model.GameSession;
 import zhegalov.course.work.model.GameSettings;
 import zhegalov.course.work.model.gamesettings.CalculatingGameSettings;

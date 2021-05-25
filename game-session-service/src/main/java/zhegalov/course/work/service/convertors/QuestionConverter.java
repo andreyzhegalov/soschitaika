@@ -1,6 +1,6 @@
 package zhegalov.course.work.service.convertors;
 
-import zhegalov.course.work.feign.dto.ReportItemDto;
+import zhegalov.course.work.dto.ReportItemDto;
 import zhegalov.course.work.model.Question;
 
 public class QuestionConverter {
