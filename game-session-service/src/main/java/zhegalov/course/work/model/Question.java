@@ -14,6 +14,7 @@ public class Question {
     private String id;
     private String sessionId;
     private String text;
+    private QuestionData questionData;
     private String correctAnswer;
     private String answer;
 }
