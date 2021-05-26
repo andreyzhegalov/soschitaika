@@ -2,7 +2,7 @@ package zhegalov.course.work;
 
 import java.util.List;
 
-import zhegalov.course.work.controllers.dto.ReportItemDto;
+import zhegalov.course.work.dto.ReportItemDto;
 
 public class TestHelper {
 

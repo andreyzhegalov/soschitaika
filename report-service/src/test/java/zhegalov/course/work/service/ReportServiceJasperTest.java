@@ -11,7 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 
 import net.sf.jasperreports.engine.JasperPrint;
 import zhegalov.course.work.TestHelper;
-import zhegalov.course.work.controllers.dto.ReportItemDto;
+import zhegalov.course.work.dto.ReportItemDto;
 
 @SpringBootTest(webEnvironment = WebEnvironment.NONE)
 public class ReportServiceJasperTest {

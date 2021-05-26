@@ -15,7 +15,7 @@ import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.export.Exporter;
 import zhegalov.course.work.TestHelper;
-import zhegalov.course.work.controllers.dto.ReportItemDto;
+import zhegalov.course.work.dto.ReportItemDto;
 
 @SpringBootTest(webEnvironment = WebEnvironment.NONE)
 @SuppressWarnings("rawtypes")

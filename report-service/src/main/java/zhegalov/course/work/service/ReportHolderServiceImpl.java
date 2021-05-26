@@ -1,31 +1,24 @@
 package zhegalov.course.work.service;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
-
 import org.springframework.stereotype.Service;
 
-import lombok.extern.slf4j.Slf4j;
+import lombok.RequiredArgsConstructor;
 import zhegalov.course.work.domain.Report;
+import zhegalov.course.work.repository.ReportRepository;
 
-@Slf4j
+@RequiredArgsConstructor
 @Service
 public class ReportHolderServiceImpl implements ReportHolderService {
-    private final Map<UUID, Report> reportMap = new HashMap<>();
+    private final ReportRepository reportRepository;
 
     @Override
     public String saveReport(Report report) {
-        final var reportId = UUID.randomUUID();
-        reportMap.put(reportId, report);
-        log.info("Report with id={} saved", reportId);
-        return reportId.toString();
+        return reportRepository.saveReport(report);
     }
 
     @Override
     public Report getReport(String reportId) {
-        log.debug("Get report with id={}", reportId);
-        return reportMap.get(UUID.fromString(reportId));
+        return reportRepository.getReport(reportId);
     }
 
 }
