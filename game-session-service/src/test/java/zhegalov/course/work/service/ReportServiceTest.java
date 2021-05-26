@@ -17,7 +17,6 @@ public class ReportServiceTest {
     @Configuration
     @Import(ReportServiceImpl.class)
     public static class TestContext {
-
     }
 
     @Autowired
