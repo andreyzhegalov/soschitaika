@@ -8,7 +8,7 @@ import java.util.stream.IntStream;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
-import zhegalov.course.work.controllers.dto.ExpressionDto;
+import zhegalov.course.work.dto.ExpressionDto;
 import zhegalov.course.work.model.GeneratorSetup;
 import zhegalov.course.work.model.expression.Expression;
 import zhegalov.course.work.model.expression.ExpressionOperation;
@@ -26,6 +26,21 @@ public class ExpressionGeneratorServiceImpl implements ExpressionGeneratorServic
         return ExpressionFactory.create(getRandomOperation(generatorSetup.getOperations()), values);
     }
 
+    @Override
+    public ExpressionDto createExpressionDto(GeneratorSetup generatorSetup) {
+        final var expression = create(generatorSetup);
+        return convert(expression);
+    }
+
+    private ExpressionDto convert(Expression expression) {
+        final var expressionDto = new ExpressionDto();
+        expressionDto.setExpression(printService.print(expression));
+        expressionDto.setResult(expression.getResult());
+        expressionDto.setOperation(expression.getOperation());
+        expressionDto.setValues(expression.getValues());
+        return expressionDto;
+    }
+
     private ExpressionOperation getRandomOperation(List<ExpressionOperation> operations) {
         final var random = new Random();
         return operations.get(random.nextInt(operations.size()));
@@ -40,16 +55,5 @@ public class ExpressionGeneratorServiceImpl implements ExpressionGeneratorServic
         final var bound = max - min;
         final var randInBound = (bound > 0) ? random.nextInt(bound) : 0;
         return min + randInBound;
-    }
-
-    @Override
-    public ExpressionDto createExpressionDto(GeneratorSetup generatorSetup) {
-        final var expressionDto = new ExpressionDto();
-        final var expression = create(generatorSetup);
-        expressionDto.setExpression(printService.print(expression));
-        expressionDto.setResult(expression.getResult());
-        expressionDto.setOperation(expression.getOperation());
-        expressionDto.setValues(expression.getValues());
-        return expressionDto;
     }
 }

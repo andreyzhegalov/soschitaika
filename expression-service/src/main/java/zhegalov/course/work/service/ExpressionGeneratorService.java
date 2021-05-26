@@ -1,6 +1,6 @@
 package zhegalov.course.work.service;
 
-import zhegalov.course.work.controllers.dto.ExpressionDto;
+import zhegalov.course.work.dto.ExpressionDto;
 import zhegalov.course.work.model.GeneratorSetup;
 import zhegalov.course.work.model.expression.Expression;
 

@@ -21,8 +21,8 @@ management:
 
 logging:
   level:
-    ROOT: DEBUG 
-    org.springframework: DEBUG
-    org.springframework.security: DEBUG
-    org.springframework.security.oauth2: DEBUG
+    ROOT: INFO
+    org.springframework: INFO
+    org.springframework.security: INFO
+    org.springframework.security.oauth2: INFO
 
