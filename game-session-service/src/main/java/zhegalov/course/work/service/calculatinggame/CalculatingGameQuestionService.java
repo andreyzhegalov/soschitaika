@@ -25,7 +25,7 @@ public class CalculatingGameQuestionService implements QuestionService {
         final var expression = expressionService.createExpression(generatorSetup);
         final var question = ExpressionConverter.createQuestion(expression);
         setSessionId(session, question);
-        return question;
+        return saveQuestion(question);
     }
 
     private void setSessionId(GameSession session, Question question) {

@@ -12,7 +12,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.util.Optional;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -27,7 +26,6 @@ import zhegalov.course.work.model.Question;
 import zhegalov.course.work.service.GameSessionService;
 import zhegalov.course.work.service.QuestionService;
 
-@Disabled
 @WebMvcTest(controllers = QuestionController.class)
 @AutoConfigureMockMvc(addFilters = false)
 public class QuestionControllerTest {
@@ -55,8 +53,7 @@ public class QuestionControllerTest {
 
         given(sessionService.getGameSession(sessionId)).willReturn(Optional.of(gameSessionWithId));
         given(sessionService.isSessionComplete(gameSessionWithId)).willReturn(false);
-        given(questionService.createQuestion(any())).willReturn(question);
-        given(questionService.saveQuestion(eq(question))).willReturn(savedQuestion);
+        given(questionService.createQuestion(any())).willReturn(savedQuestion);
 
         mvc.perform(
                 post("/api/questions").content(jsonString).header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON))
@@ -67,7 +64,6 @@ public class QuestionControllerTest {
         then(sessionService).should().getGameSession(eq(sessionId));
         then(sessionService).should().isSessionComplete(gameSessionWithId);
         then(questionService).should().createQuestion(any());
-        then(questionService).should().saveQuestion(eq(question));
     }
 
     @Test
