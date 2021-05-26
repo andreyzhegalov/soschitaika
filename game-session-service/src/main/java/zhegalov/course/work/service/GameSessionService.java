@@ -6,6 +6,8 @@ import zhegalov.course.work.model.GameSession;
 
 public interface GameSessionService {
 
+    GameSession create(String jsonData);
+
     GameSession save(GameSession gameSession);
 
     Optional<GameSession> getGameSession(String id);
@@ -13,4 +15,3 @@ public interface GameSessionService {
     boolean isSessionComplete(GameSession gameSession);
 
 }
-

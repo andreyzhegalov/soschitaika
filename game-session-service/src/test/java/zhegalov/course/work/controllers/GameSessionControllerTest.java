@@ -1,6 +1,7 @@
 package zhegalov.course.work.controllers;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.then;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -49,12 +50,14 @@ public class GameSessionControllerTest {
         final var jsonString = mapper.writeValueAsString(gameSession);
 
         gameSession.setId("some id");
+        given(sessionService.create(anyString())).willReturn(gameSession);
         given(sessionService.save(any())).willReturn(gameSession);
 
         mvc.perform(
                 post("/api/sessions").content(jsonString).header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON))
                 .andDo(print()).andExpect(status().isCreated());
 
+        then(sessionService).should().create(any());
         then(sessionService).should().save(any());
     }
 }
