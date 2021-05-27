@@ -2,6 +2,7 @@ package zhegalov.course.work.repository;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.stereotype.Repository;
@@ -23,9 +24,9 @@ public class ReportRepositoryHashMap implements ReportRepository {
     }
 
     @Override
-    public Report getReport(String reportId) {
+    public Optional<Report> getReport(String reportId) {
         log.debug("Get report with id={}", reportId);
-        return reportMap.get(UUID.fromString(reportId));
+        return Optional.ofNullable(reportMap.get(UUID.fromString(reportId)));
     }
 
 }

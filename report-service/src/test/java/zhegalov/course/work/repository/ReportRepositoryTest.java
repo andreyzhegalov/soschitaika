@@ -26,7 +26,8 @@ public class ReportRepositoryTest {
         final var report = new Report("report data".getBytes());
         final var reportId = reportRepository.saveReport(report);
         final var savedReport = reportRepository.getReport(reportId);
-        assertThat(savedReport.getData()).isEqualTo(report.getData());
+        assertThat(savedReport).isPresent().isNotNull();
+        assertThat(savedReport.get().getData()).isEqualTo(report.getData());
     }
 }
 

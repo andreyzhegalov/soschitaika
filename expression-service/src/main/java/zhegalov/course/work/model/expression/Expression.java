@@ -2,9 +2,11 @@ package zhegalov.course.work.model.expression;
 
 import java.util.List;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Setter
+@Getter
 public abstract class Expression {
     private final List<Integer> values;
 

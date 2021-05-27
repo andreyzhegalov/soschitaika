@@ -3,11 +3,12 @@ package zhegalov.course.work.service;
 import java.util.HashMap;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import lombok.RequiredArgsConstructor;
 import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
@@ -18,22 +19,33 @@ import zhegalov.course.work.configuration.ByteArrayWrapper;
 import zhegalov.course.work.dto.ReportItemDto;
 
 @SuppressWarnings("rawtypes")
-@RequiredArgsConstructor
 @Service
 public class ReportServiceJasperReports implements ReportService<JasperPrint, List<ReportItemDto>> {
-    private final JasperReport jasperReport;
     private final Exporter exporter;
     private final ByteArrayWrapper byteArrayWrapper;
+    private final String reportTemplatePath;
+
+    public ReportServiceJasperReports(Exporter exporter, ByteArrayWrapper byteArrayWrapper,
+            @Value("${jasper.template}") String reportTemplatePath) throws JRException {
+        this.reportTemplatePath = reportTemplatePath;
+        this.exporter = exporter;
+        this.byteArrayWrapper = byteArrayWrapper;
+    }
 
     @Override
     @SuppressWarnings("unchecked")
     public JasperPrint createReport(List<ReportItemDto> data) {
+        final var reportTemplate = getClass().getClassLoader().getResourceAsStream(reportTemplatePath);
+        JasperReport jasperReport;
+        try {
+            jasperReport = JasperCompileManager.compileReport(reportTemplate);
+        } catch (JRException e) {
+            throw new ReportServiceException(e);
+        }
         final var ds = new JRBeanCollectionDataSource(data);
-
         final var params = new HashMap();
         params.put("datasource", ds);
         params.put("result", makeResult(data));
-
         try {
             return JasperFillManager.fillReport(jasperReport, params, new JREmptyDataSource());
         } catch (JRException e) {

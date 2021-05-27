@@ -1,11 +1,13 @@
 package zhegalov.course.work.service;
 
+import java.util.Optional;
+
 import zhegalov.course.work.domain.Report;
 
 public interface ReportHolderService {
 
     String saveReport(Report report);
 
-    Report getReport(String reportId);
+    Optional<Report> getReport(String reportId);
 
 }

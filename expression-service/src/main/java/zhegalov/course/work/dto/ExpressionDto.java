@@ -2,11 +2,13 @@ package zhegalov.course.work.dto;
 
 import java.util.List;
 
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Getter
+@Setter
 @NoArgsConstructor
-@Data
 public class ExpressionDto {
     private String operation;
     private List<Integer> values;
