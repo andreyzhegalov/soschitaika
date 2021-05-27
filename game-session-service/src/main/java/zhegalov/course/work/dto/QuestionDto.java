@@ -1,12 +1,14 @@
 package zhegalov.course.work.dto;
 
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import zhegalov.course.work.model.Question;
 import zhegalov.course.work.model.QuestionData;
 
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
 public class QuestionDto {
     private String questionId;
     private String questionText;

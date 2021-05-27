@@ -1,10 +1,12 @@
 package zhegalov.course.work.dto;
 
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import zhegalov.course.work.model.GameSession;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 public class SessionDto {
     private String sessionId;

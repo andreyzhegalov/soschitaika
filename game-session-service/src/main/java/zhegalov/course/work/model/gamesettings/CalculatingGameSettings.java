@@ -2,14 +2,14 @@ package zhegalov.course.work.model.gamesettings;
 
 import java.util.List;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import zhegalov.course.work.model.GameSettings;
 
 @NoArgsConstructor
-@Data
-@EqualsAndHashCode(callSuper = false)
+@Getter
+@Setter
 public class CalculatingGameSettings extends GameSettings{
     private Integer min;
     private Integer max;
