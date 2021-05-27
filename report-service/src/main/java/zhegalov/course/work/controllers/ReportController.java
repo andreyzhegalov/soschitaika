@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import lombok.RequiredArgsConstructor;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -33,7 +34,11 @@ public class ReportController {
     @ResponseStatus(HttpStatus.OK)
     public String getReport(@PathVariable("reportId") String reportId) {
         final var report = reportHolderService.getReport(reportId);
-        return new String(report.getData());
+        if(report.isPresent()){
+            return new String(report.get().getData());
+        }
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                "report with id " + reportId + " not found");
     }
 
 }
