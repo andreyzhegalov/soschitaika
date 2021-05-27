@@ -14,11 +14,8 @@ public class AnswerServiceImpl implements AnswerService {
 
     @Override
     public Question saveNewAnswer(AnswerDto answerDto) {
-        final var mayBeQuestion = questionRepository.findById(answerDto.getQuestionId());
-        if (mayBeQuestion.isEmpty()) {
-            throw new GameServiceException("Question with id " + answerDto.getQuestionId() + " not exist");
-        }
-        final var question = mayBeQuestion.get();
+        final var question = questionRepository.findById(answerDto.getQuestionId()).orElseThrow(
+                () -> new GameServiceException("Question with id " + answerDto.getQuestionId() + " not exist"));
         question.setAnswer(answerDto.getAnswer());
         return questionRepository.save(question);
     }

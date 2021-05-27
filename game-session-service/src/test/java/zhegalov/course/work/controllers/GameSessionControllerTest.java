@@ -1,6 +1,7 @@
 package zhegalov.course.work.controllers;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.then;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -29,13 +30,30 @@ import zhegalov.course.work.service.GameSessionService;
 @AutoConfigureMockMvc(addFilters = false)
 public class GameSessionControllerTest {
     @MockBean
-    private GameSessionService  sessionService;
+    private GameSessionService sessionService;
 
     @Autowired
     private MockMvc mvc;
 
+    private final ObjectMapper mapper = new ObjectMapper();
+
     @Test
     void shouldSaveNewSession() throws Exception {
+        final var gameSession = createGameSession();
+        final var jsonString = mapper.writeValueAsString(gameSession);
+
+        given(sessionService.create(anyString())).willReturn(getSavedGameSession());
+        given(sessionService.save(any())).willReturn(getSavedGameSession());
+
+        mvc.perform(
+                post("/api/sessions").content(jsonString).header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON))
+                .andDo(print()).andExpect(status().isCreated());
+
+        then(sessionService).should().create(any());
+        then(sessionService).should().save(any());
+    }
+
+    private GameSession createGameSession() {
         final var generatorSetup = new CalculatingGameSettings();
         generatorSetup.setMin(0);
         generatorSetup.setMax(1);
@@ -44,17 +62,12 @@ public class GameSessionControllerTest {
         final var gameSession = new GameSession();
         gameSession.setQuestionCount(2);
         gameSession.setGameSettings(generatorSetup);
+        return gameSession;
+    }
 
-        final var mapper = new ObjectMapper();
-        final var jsonString = mapper.writeValueAsString(gameSession);
-
+    private GameSession getSavedGameSession() {
+        final var gameSession = createGameSession();
         gameSession.setId("some id");
-        given(sessionService.save(any())).willReturn(gameSession);
-
-        mvc.perform(
-                post("/api/sessions").content(jsonString).header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON))
-                .andDo(print()).andExpect(status().isCreated());
-
-        then(sessionService).should().save(any());
+        return gameSession;
     }
 }

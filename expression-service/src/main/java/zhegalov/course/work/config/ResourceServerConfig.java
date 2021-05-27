@@ -19,7 +19,6 @@ public class ResourceServerConfig {
             .csrf().disable()
             .oauth2ResourceServer()
             .jwt();
-
         return http.build();
     }
     // @formatter:on

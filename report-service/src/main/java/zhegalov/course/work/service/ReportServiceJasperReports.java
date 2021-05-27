@@ -15,7 +15,7 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.export.Exporter;
 import net.sf.jasperreports.export.SimpleExporterInput;
 import zhegalov.course.work.configuration.ByteArrayWrapper;
-import zhegalov.course.work.controllers.dto.ReportItemDto;
+import zhegalov.course.work.dto.ReportItemDto;
 
 @SuppressWarnings("rawtypes")
 @RequiredArgsConstructor
@@ -41,12 +41,6 @@ public class ReportServiceJasperReports implements ReportService<JasperPrint, Li
         }
     }
 
-    private String makeResult(List<ReportItemDto> data) {
-        final var correctAnswer = data.stream().filter(ReportItemDto::isCorrect).count();
-        final var total = data.size();
-        return String.format("Correct %d of %d", correctAnswer, total);
-    }
-
     @Override
     @SuppressWarnings("unchecked")
     public byte[] print(JasperPrint report) {
@@ -57,5 +51,11 @@ public class ReportServiceJasperReports implements ReportService<JasperPrint, Li
             throw new ReportServiceException(e);
         }
         return byteArrayWrapper.getOutputStream().toByteArray();
+    }
+
+    private String makeResult(List<ReportItemDto> data) {
+        final var correctAnswer = data.stream().filter(ReportItemDto::isCorrect).count();
+        final var total = data.size();
+        return String.format("Correct %d of %d", correctAnswer, total);
     }
 }

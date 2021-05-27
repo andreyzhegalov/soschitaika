@@ -22,7 +22,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import net.sf.jasperreports.engine.JasperPrint;
 import zhegalov.course.work.TestHelper;
-import zhegalov.course.work.controllers.dto.ReportItemDto;
+import zhegalov.course.work.dto.ReportItemDto;
 import zhegalov.course.work.domain.Report;
 import zhegalov.course.work.service.ReportHolderService;
 import zhegalov.course.work.service.ReportService;

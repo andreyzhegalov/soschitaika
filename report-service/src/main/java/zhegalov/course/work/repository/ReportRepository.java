@@ -1,8 +1,8 @@
-package zhegalov.course.work.service;
+package zhegalov.course.work.repository;
 
 import zhegalov.course.work.domain.Report;
 
-public interface ReportHolderService {
+public interface ReportRepository {
 
     String saveReport(Report report);
 

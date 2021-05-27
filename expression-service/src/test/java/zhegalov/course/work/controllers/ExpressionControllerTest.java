@@ -18,7 +18,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import zhegalov.course.work.controllers.dto.ExpressionDto;
+import zhegalov.course.work.dto.ExpressionDto;
 import zhegalov.course.work.model.GeneratorSetup;
 import zhegalov.course.work.model.expression.ExpressionOperation;
 import zhegalov.course.work.service.ExpressionGeneratorService;

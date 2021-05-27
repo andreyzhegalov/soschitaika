@@ -16,7 +16,6 @@ import org.springframework.messaging.handler.annotation.SendTo;
 @Configuration
 public class IntegrationConfig {
 
-
     @Bean
     @SendTo("downstream.results")
     public IntegrationFlow reportCreateFlow(ConnectionFactory connectionFactory) {

@@ -33,8 +33,7 @@ public class QuestionController {
                     "session with id " + session.getSessionId() + " is completed");
         }
         final var question = questionService.createQuestion(gameSession.get());
-        final var savedQuestion = questionService.saveQuestion(question);
-        return new QuestionDto(savedQuestion);
+        return new QuestionDto(question);
     }
 
 }

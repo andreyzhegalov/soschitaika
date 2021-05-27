@@ -1,6 +1,5 @@
 package zhegalov.course.work.service.calculatinggame;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
@@ -42,6 +41,19 @@ public class CalculatingGameQuestionServiceTest {
 
     @Test
     void shouldReceiveExpressionFromExpressionService() {
+        final var gameSession = createSession();
+        final var expression = new ExpressionDto();
+        expression.setExpression("1+1");
+        expression.setResult(2);
+        given(expressionService.createExpression(any())).willReturn(expression);
+
+        questionService.createQuestion(gameSession);
+
+        then(expressionService).should().createExpression(any());
+        then(questionRepository).should().save(any());
+    }
+
+    private GameSession createSession() {
         final var gameSettings = new CalculatingGameSettings();
         gameSettings.setMax(10);
         gameSettings.setMax(1);
@@ -51,20 +63,7 @@ public class CalculatingGameQuestionServiceTest {
         gameSession.setGameSettings(gameSettings);
         final var sessionId = "sessionId";
         gameSession.setId(sessionId);
-
-        final var expression = new ExpressionDto();
-        expression.setExpression("1+1");
-        expression.setResult(2);
-
-        given(expressionService.createExpression(any())).willReturn(expression);
-
-        final var questions = questionService.createQuestion(gameSession);
-
-        assertThat(questions).isNotNull();
-        assertThat(questions.getText()).isEqualTo(expression.getExpression());
-        assertThat(questions.getCorrectAnswer()).isEqualTo("2");
-        assertThat(questions.getSessionId()).isEqualTo(sessionId);
-        then(expressionService).should().createExpression(any());
+        return gameSession;
     }
 
     @Test
@@ -85,7 +84,7 @@ public class CalculatingGameQuestionServiceTest {
     }
 
     @Test
-    void shouldGetAllQuestionWithAnswer(){
+    void shouldGetAllQuestionWithAnswer() {
         GameSession session = new GameSession();
         final var sessionId = "123";
         session.setId(sessionId);
