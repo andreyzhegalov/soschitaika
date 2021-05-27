@@ -1,5 +1,7 @@
 package zhegalov.course.work.service;
 
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
@@ -17,7 +19,7 @@ public class ReportHolderServiceImpl implements ReportHolderService {
     }
 
     @Override
-    public Report getReport(String reportId) {
+    public Optional<Report> getReport(String reportId) {
         return reportRepository.getReport(reportId);
     }
 

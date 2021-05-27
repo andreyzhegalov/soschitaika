@@ -1,10 +1,12 @@
 package zhegalov.course.work.dto;
 
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
 public class ReportItemDto {
     private String question;
     private String answer;

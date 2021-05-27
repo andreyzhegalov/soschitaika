@@ -1,6 +1,7 @@
 package zhegalov.course.work.controllers;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.then;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -9,6 +10,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -22,8 +24,8 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import net.sf.jasperreports.engine.JasperPrint;
 import zhegalov.course.work.TestHelper;
-import zhegalov.course.work.dto.ReportItemDto;
 import zhegalov.course.work.domain.Report;
+import zhegalov.course.work.dto.ReportItemDto;
 import zhegalov.course.work.service.ReportHolderService;
 import zhegalov.course.work.service.ReportService;
 
@@ -57,7 +59,7 @@ public class ReportControllerTest {
     @Test
     void shouldReturnReport() throws Exception {
         final var reportId = "afa76306-f01c-4bfd-b90e-80becd0b2010";
-        given(reportHolderService.getReport(reportId)).willReturn(new Report(new byte[0]));
+        given(reportHolderService.getReport(reportId)).willReturn(Optional.of(new Report(new byte[0])));
         // @formatter:off
         mvc.perform(
                 get("/api/reports/{reportId}", reportId)
@@ -67,5 +69,20 @@ public class ReportControllerTest {
         // @formatter:on
         //
         then(reportHolderService).should().getReport(reportId);
+    }
+
+    @Test
+    void shouldReturnNotFoundIdReportIdNotExist() throws Exception{
+        given(reportHolderService.getReport(anyString())).willReturn(Optional.empty());
+        // @formatter:off
+        mvc.perform(
+                get("/api/reports/{reportId}", "not existed report id")
+                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isNotFound());
+        // @formatter:on
+        //
+        then(reportHolderService).should().getReport(anyString());
+
     }
 }

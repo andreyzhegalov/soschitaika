@@ -2,11 +2,13 @@ package zhegalov.course.work.dto;
 
 import java.util.List;
 
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
 public class GeneratorSetup {
     private Integer min;
     private Integer max;

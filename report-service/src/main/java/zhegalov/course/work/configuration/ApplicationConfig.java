@@ -1,12 +1,8 @@
 package zhegalov.course.work.configuration;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.export.HtmlExporter;
 import net.sf.jasperreports.engine.export.JRPdfExporter;
 import net.sf.jasperreports.export.Exporter;
@@ -17,11 +13,6 @@ import net.sf.jasperreports.export.SimplePdfReportConfiguration;
 
 @Configuration
 public class ApplicationConfig {
-    @Bean
-    JasperReport getJasperReport(@Value("${jasper.template}") String reportTemplatePath) throws JRException {
-        final var reportTemplate = getClass().getClassLoader().getResourceAsStream(reportTemplatePath);
-        return JasperCompileManager.compileReport(reportTemplate);
-    }
 
     @SuppressWarnings("rawtypes")
     // @Bean
