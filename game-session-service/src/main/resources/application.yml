@@ -18,14 +18,14 @@ spring:
     oauth2:
       client:
         registration:
-          expression-client-oidc:
+          session-client-oidc:
             provider: spring
-            client-id: expression-client
+            client-id: session-client
             client-secret: secret
             authorization-grant-type: authorization_code
             redirect-uri: "http://game-server:8030/login/oauth2/code/{registrationId}"
             scope: openid,expression.read
-            client-name: expression-client-oidc
+            client-name: session-client-oidc
         provider:
           spring:
             issuer-uri: http://auth-server:9000

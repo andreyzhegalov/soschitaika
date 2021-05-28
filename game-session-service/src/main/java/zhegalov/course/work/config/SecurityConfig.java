@@ -32,7 +32,7 @@ public class SecurityConfig {
                 .authenticated())
                 // Configures authentication support using an OAuth 2.0 and/or OpenID Connect 1.0 Provider.
                 // The "authentication flow" is implemented using the Authorization Code Grant,
-                .oauth2Login(oauth2Login -> oauth2Login.loginPage("/oauth2/authorization/expression-client-oidc"))
+                .oauth2Login(oauth2Login -> oauth2Login.loginPage("/oauth2/authorization/session-client-oidc"))
                 .oauth2Client(withDefaults())
                 .csrf().disable();
         return http.build();
@@ -61,7 +61,7 @@ public class SecurityConfig {
         return requestTemplate -> {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             OAuth2AuthorizeRequest authorizeRequest = OAuth2AuthorizeRequest
-                    .withClientRegistrationId("expression-client-oidc").principal(authentication).build();
+                    .withClientRegistrationId("session-client-oidc").principal(authentication).build();
             OAuth2AuthorizedClient authorizedClient = authorizedClientManager.authorize(authorizeRequest);
             OAuth2AccessToken accessToken = Objects.requireNonNull(authorizedClient).getAccessToken();
 
