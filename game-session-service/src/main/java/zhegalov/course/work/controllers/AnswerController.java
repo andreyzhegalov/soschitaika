@@ -19,7 +19,7 @@ public class AnswerController {
 
     @PostMapping("/api/answers")
     @ResponseStatus(HttpStatus.CREATED)
-    public void saveNewAnswer(@RequestBody AnswerDto answer){
+    public void saveNewAnswer(@RequestBody AnswerDto answer) {
         try {
             answerService.saveNewAnswer(answer);
         } catch (GameServiceException e) {

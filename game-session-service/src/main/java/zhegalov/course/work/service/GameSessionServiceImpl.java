@@ -55,7 +55,10 @@ public class GameSessionServiceImpl implements GameSessionService {
         if (questions.isEmpty()) {
             return false;
         }
-        final var countQuestionsWithAnswer = questions.stream().filter(q -> Objects.nonNull(q.getAnswer())).count();
+        final var countQuestionsWithAnswer = questions
+                .stream()
+                .filter(q -> Objects.nonNull(q.getAnswer()))
+                .count();
         log.debug("founded questions with answer {}", countQuestionsWithAnswer);
         return countQuestionsWithAnswer == gameSession.getQuestionCount();
     }

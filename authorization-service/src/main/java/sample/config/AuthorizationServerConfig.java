@@ -53,7 +53,7 @@ public class AuthorizationServerConfig {
                 .scope("expression.write")
                 .clientSettings(clientSettings -> clientSettings.requireUserConsent(true))
                 .build();
-    return new InMemoryRegisteredClientRepository(registeredClient);
+        return new InMemoryRegisteredClientRepository(registeredClient);
     }
     // @formatter:on
 

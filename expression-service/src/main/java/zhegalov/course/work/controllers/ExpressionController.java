@@ -15,11 +15,11 @@ import zhegalov.course.work.service.ExpressionGeneratorService;
 @RestController
 public class ExpressionController {
 
-    private final ExpressionGeneratorService  expressionGeneratorService;
+    private final ExpressionGeneratorService expressionGeneratorService;
 
     @PostMapping(path = "/api/expressions")
     @ResponseStatus(HttpStatus.CREATED)
-    public ExpressionDto createExpression(@RequestBody GeneratorSetup generatorSetup){
+    public ExpressionDto createExpression(@RequestBody GeneratorSetup generatorSetup) {
         return expressionGeneratorService.createExpressionDto(generatorSetup);
     }
 }

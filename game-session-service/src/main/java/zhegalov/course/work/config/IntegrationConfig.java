@@ -39,26 +39,21 @@ public class IntegrationConfig {
     public IntegrationFlow prepareDataFlow() {
         // @formatter:off
         return f -> f
-            .log()
-            .handle("reportServiceImpl", "createReportData")
-            .channel("requestReportFlow.input");
+                .log()
+                .handle("reportServiceImpl", "createReportData")
+                .channel("requestReportFlow.input");
         // @formatter:on
-    }
-
-    @Bean
-    public DirectChannel reportChannel(){
-        return new DirectChannel();
     }
 
     @Bean
     public IntegrationFlow requestReportFlow(RabbitTemplate amqpTemplate) {
         // @formatter:off
         return f -> f
-            .log()
-            .handle(Amqp.outboundGateway(amqpTemplate)
-						.exchangeName("downstream")
-						.routingKey("downstream.request"))
-            .transform(Transformers.fromJson(ReportDto.class));
+                .log()
+                .handle(Amqp.outboundGateway(amqpTemplate)
+                        .exchangeName("downstream")
+                        .routingKey("downstream.request"))
+                .transform(Transformers.fromJson(ReportDto.class));
         // @formatter:on
     }
 
@@ -66,4 +61,10 @@ public class IntegrationConfig {
     public MessageConverter jsonMessageConverter(ObjectMapper objectMapper) {
         return new Jackson2JsonMessageConverter(objectMapper);
     }
+
+    @Bean
+    public DirectChannel reportChannel() {
+        return new DirectChannel();
+    }
+
 }

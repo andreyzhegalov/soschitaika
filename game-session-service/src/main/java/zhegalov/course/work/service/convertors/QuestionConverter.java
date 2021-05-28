@@ -15,7 +15,7 @@ public class QuestionConverter {
     }
 
     private static boolean isCorrectAnswer(Question question) {
-        return question.getAnswer() == question.getCorrectAnswer();
+        return question.getAnswer().equals(question.getCorrectAnswer());
     }
 
 }
