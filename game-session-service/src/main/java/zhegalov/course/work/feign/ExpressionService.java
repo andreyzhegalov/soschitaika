@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import zhegalov.course.work.dto.ExpressionDto;
 import zhegalov.course.work.dto.GeneratorSetup;
 
-@FeignClient(name = "expression-service", url = "http://localhost:8031")
+@FeignClient(name = "expression-service", url = "${expression-server.url}")
 public interface ExpressionService {
 
     @PostMapping(path = "/api/expressions")

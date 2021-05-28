@@ -30,8 +30,8 @@ spring:
           spring:
             issuer-uri: http://auth-server:9000
 
-expression:
-  base-uri: http://127.0.0.1:8031
+expression-server:
+  url: http://127.0.0.1:8031
 
 management:
   endpoints:
