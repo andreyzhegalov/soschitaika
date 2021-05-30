@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -39,11 +40,13 @@ public class GameSessionServiceImpl implements GameSessionService {
     }
 
     @Override
+    @Transactional
     public GameSession save(GameSession gameSession) {
         return gameSessionRepository.save(gameSession);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Optional<GameSession> getGameSession(String id) {
         return gameSessionRepository.findById(id);
     }

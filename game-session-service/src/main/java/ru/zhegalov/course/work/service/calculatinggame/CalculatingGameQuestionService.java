@@ -3,6 +3,7 @@ package ru.zhegalov.course.work.service.calculatinggame;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
 import ru.zhegalov.course.work.feign.ExpressionService;
@@ -33,16 +34,19 @@ public class CalculatingGameQuestionService implements QuestionService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Question> getQuestions(GameSession session) {
         return questionRepository.findBySessionId(session.getId());
     }
 
     @Override
+    @Transactional
     public Question saveQuestion(Question question) {
         return questionRepository.save(question);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Question> getQuestionsWithAnswer(GameSession session) {
         return questionRepository.findBySessionIdAndAnswerIsNotNull(session.getId());
     }
