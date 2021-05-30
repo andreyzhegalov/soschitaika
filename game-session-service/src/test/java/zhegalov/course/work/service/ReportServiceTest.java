@@ -11,11 +11,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
 import zhegalov.course.work.dto.SessionDto;
+import zhegalov.course.work.service.convertors.QuestionConverter;
 
 @SpringBootTest
 public class ReportServiceTest {
     @Configuration
-    @Import(ReportServiceImpl.class)
+    @Import({ReportServiceImpl.class, QuestionConverter.class})
     public static class TestContext {
     }
 

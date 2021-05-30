@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import zhegalov.course.work.dto.SessionDto;
 import zhegalov.course.work.dto.ReportItemDto;
+import zhegalov.course.work.dto.SessionDto;
 import zhegalov.course.work.model.GameSession;
 import zhegalov.course.work.model.Question;
 import zhegalov.course.work.service.convertors.QuestionConverter;
@@ -18,6 +18,7 @@ import zhegalov.course.work.service.convertors.QuestionConverter;
 @Service
 public class ReportServiceImpl implements ReportService {
     private final QuestionService questionService;
+    private final QuestionConverter questionConverter;
 
     @Override
     public List<ReportItemDto> createReportData(SessionDto sessionDto) {
@@ -33,6 +34,6 @@ public class ReportServiceImpl implements ReportService {
     }
 
     private List<ReportItemDto> convert(List<Question> questionList) {
-        return questionList.stream().map(QuestionConverter::convertToReportItem).collect(Collectors.toList());
+        return questionList.stream().map(questionConverter::convertToReportItem).collect(Collectors.toList());
     }
 }

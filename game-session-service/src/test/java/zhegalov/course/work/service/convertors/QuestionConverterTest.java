@@ -16,7 +16,7 @@ public class QuestionConverterTest {
         question.setCorrectAnswer("correctAnswer");
         question.setSessionId("sessionId");
 
-        final var reportItem = QuestionConverter.convertToReportItem(question);
+        final var reportItem = new QuestionConverter().convertToReportItem(question);
         assertThat(reportItem).isNotNull();
         assertThat(reportItem.getQuestion()).isEqualTo("text");
         assertThat(reportItem.getAnswer()).isEqualTo("answer");
@@ -29,7 +29,7 @@ public class QuestionConverterTest {
         question.setAnswer("answer");
         question.setCorrectAnswer("answer");
 
-        final var reportItem = QuestionConverter.convertToReportItem(question);
+        final var reportItem = new QuestionConverter().convertToReportItem(question);
         assertThat(reportItem).isNotNull();
         assertThat(reportItem.isCorrect()).isTrue();
     }
@@ -40,7 +40,7 @@ public class QuestionConverterTest {
         question.setAnswer("answer");
         question.setCorrectAnswer("not correct answer");
 
-        final var reportItem = QuestionConverter.convertToReportItem(question);
+        final var reportItem = new QuestionConverter().convertToReportItem(question);
         assertThat(reportItem).isNotNull();
         assertThat(reportItem.isCorrect()).isFalse();
     }

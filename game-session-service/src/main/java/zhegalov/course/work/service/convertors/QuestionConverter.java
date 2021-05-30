@@ -1,11 +1,14 @@
 package zhegalov.course.work.service.convertors;
 
+import org.springframework.stereotype.Component;
+
 import zhegalov.course.work.dto.ReportItemDto;
 import zhegalov.course.work.model.Question;
 
+@Component
 public class QuestionConverter {
 
-    public static ReportItemDto convertToReportItem(Question question) {
+    public ReportItemDto convertToReportItem(Question question) {
         final var reportItem = new ReportItemDto();
         reportItem.setQuestion(question.getText());
         reportItem.setAnswer(question.getAnswer());
@@ -14,7 +17,7 @@ public class QuestionConverter {
         return reportItem;
     }
 
-    private static boolean isCorrectAnswer(Question question) {
+    private boolean isCorrectAnswer(Question question) {
         return question.getAnswer().equals(question.getCorrectAnswer());
     }
 
