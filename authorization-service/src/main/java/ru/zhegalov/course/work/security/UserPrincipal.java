@@ -1,4 +1,4 @@
-package sample.security;
+package ru.zhegalov.course.work.security;
 import java.util.Collection;
 import java.util.Collections;
 
@@ -7,7 +7,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import lombok.RequiredArgsConstructor;
-import sample.model.User;
+import ru.zhegalov.course.work.model.User;
 
 @RequiredArgsConstructor
 public class UserPrincipal implements UserDetails {

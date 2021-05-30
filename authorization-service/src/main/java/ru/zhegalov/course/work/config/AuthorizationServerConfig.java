@@ -1,4 +1,4 @@
-package sample.config;
+package ru.zhegalov.course.work.config;
 
 import java.util.UUID;
 
@@ -23,7 +23,7 @@ import org.springframework.security.oauth2.server.authorization.client.Registere
 import org.springframework.security.oauth2.server.authorization.config.ProviderSettings;
 import org.springframework.security.web.SecurityFilterChain;
 
-import sample.jose.Jwks;
+import ru.zhegalov.course.work.jose.Jwks;
 
 @Configuration(proxyBeanMethods = false)
 public class AuthorizationServerConfig {

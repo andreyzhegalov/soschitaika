@@ -1,4 +1,4 @@
-package sample.config;
+package ru.zhegalov.course.work.config;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 

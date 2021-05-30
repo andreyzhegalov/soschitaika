@@ -1,4 +1,4 @@
-package sample.jose;
+package ru.zhegalov.course.work.jose;
 
 import java.math.BigInteger;
 import java.security.KeyPair;

@@ -1,4 +1,4 @@
-package sample.security;
+package ru.zhegalov.course.work.security;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import sample.repositories.UserRepository;
+import ru.zhegalov.course.work.repositories.UserRepository;
 
 @Slf4j
 @RequiredArgsConstructor

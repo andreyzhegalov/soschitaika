@@ -1,10 +1,10 @@
-package sample.repositories;
+package ru.zhegalov.course.work.repositories;
 
 import java.util.Optional;
 
 import org.springframework.stereotype.Repository;
 
-import sample.model.User;
+import ru.zhegalov.course.work.model.User;
 
 @Repository
 public class UserRepository {

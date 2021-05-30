@@ -1,4 +1,4 @@
-package sample.model;
+package ru.zhegalov.course.work.model;
 
 
 import lombok.AllArgsConstructor;

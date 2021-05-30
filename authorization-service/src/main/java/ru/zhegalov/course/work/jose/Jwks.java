@@ -1,4 +1,4 @@
-package sample.jose;
+package ru.zhegalov.course.work.jose;
 
 import java.security.KeyPair;
 import java.security.interfaces.ECPrivateKey;
