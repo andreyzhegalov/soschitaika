@@ -18,20 +18,20 @@ spring:
     oauth2:
       client:
         registration:
-          expression-client-oidc:
+          session-client-oidc:
             provider: spring
-            client-id: expression-client
+            client-id: session-client
             client-secret: secret
             authorization-grant-type: authorization_code
             redirect-uri: "http://game-server:8030/login/oauth2/code/{registrationId}"
             scope: openid,expression.read
-            client-name: expression-client-oidc
+            client-name: session-client-oidc
         provider:
           spring:
             issuer-uri: http://auth-server:9000
 
-expression:
-  base-uri: http://127.0.0.1:8031
+expression-server:
+  url: http://127.0.0.1:8031
 
 management:
   endpoints:
@@ -44,9 +44,9 @@ management:
 
 logging:
   level:
-    ROOT: DEBUG
-    org.springframework: DEBUG
-    org.springframework.security.oauth2: DEBUG
-    org.springframework.integration: DEBUG
-    org.springframework.web.socket: DEBUG
+    ROOT: INFO
+    org.springframework: INFO
+    org.springframework.security.oauth2: INFO
+    org.springframework.integration: INFO
+    org.springframework.web.socket: INFO
 

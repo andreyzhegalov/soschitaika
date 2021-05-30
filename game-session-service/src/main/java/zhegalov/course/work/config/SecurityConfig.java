@@ -30,24 +30,12 @@ public class SecurityConfig {
         http.authorizeRequests(authorizeRequests -> authorizeRequests
                 .antMatchers("/**.html", "/**.js", "/webjars/**", "/**.css", "/endpoint/**").permitAll().anyRequest()
                 .authenticated())
-                .oauth2Login(oauth2Login -> oauth2Login.loginPage("/oauth2/authorization/expression-client-oidc"))
+                // Configures authentication support using an OAuth 2.0 and/or OpenID Connect 1.0 Provider.
+                // The "authentication flow" is implemented using the Authorization Code Grant,
+                .oauth2Login(oauth2Login -> oauth2Login.loginPage("/oauth2/authorization/session-client-oidc"))
                 .oauth2Client(withDefaults())
                 .csrf().disable();
         return http.build();
-    }
-
-    @Bean
-    public RequestInterceptor requestInterceptor(OAuth2AuthorizedClientManager authorizedClientManager) {
-
-        return requestTemplate -> {
-            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-            OAuth2AuthorizeRequest authorizeRequest = OAuth2AuthorizeRequest
-                    .withClientRegistrationId("expression-client-oidc").principal(authentication).build();
-            OAuth2AuthorizedClient authorizedClient = authorizedClientManager.authorize(authorizeRequest);
-            OAuth2AccessToken accessToken = Objects.requireNonNull(authorizedClient).getAccessToken();
-
-            requestTemplate.header(HttpHeaders.AUTHORIZATION, "Bearer " + accessToken.getTokenValue());
-        };
     }
 
     @Bean
@@ -66,4 +54,19 @@ public class SecurityConfig {
         authorizedClientManager.setAuthorizedClientProvider(authorizedClientProvider);
         return authorizedClientManager;
     }
+
+    @Bean
+    public RequestInterceptor requestInterceptor(OAuth2AuthorizedClientManager authorizedClientManager) {
+
+        return requestTemplate -> {
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            OAuth2AuthorizeRequest authorizeRequest = OAuth2AuthorizeRequest
+                    .withClientRegistrationId("session-client-oidc").principal(authentication).build();
+            OAuth2AuthorizedClient authorizedClient = authorizedClientManager.authorize(authorizeRequest);
+            OAuth2AccessToken accessToken = Objects.requireNonNull(authorizedClient).getAccessToken();
+
+            requestTemplate.header(HttpHeaders.AUTHORIZATION, "Bearer " + accessToken.getTokenValue());
+        };
+    }
+
 }
