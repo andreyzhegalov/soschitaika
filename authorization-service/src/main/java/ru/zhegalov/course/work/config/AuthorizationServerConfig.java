@@ -40,23 +40,23 @@ public class AuthorizationServerConfig {
     @Bean
     public RegisteredClientRepository registeredClientRepository() {
         RegisteredClient registeredClient = RegisteredClient.withId(UUID.randomUUID().toString())
-                .clientId("session-client")
-                .clientSecret("secret")
-                .clientAuthenticationMethod(ClientAuthenticationMethod.BASIC)
-                .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
-                .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
-                .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
-                .redirectUri("http://game-server:8030/login/oauth2/code/session-client-oidc")
-                .redirectUri("http://game-server:8030/authorized")
-                .scope(OidcScopes.OPENID)
-                .scope("expression.read")
-                .scope("expression.write")
-                .clientSettings(clientSettings -> clientSettings.requireUserConsent(true))
-                .build();
-        return new InMemoryRegisteredClientRepository(registeredClient);
+        .clientId("session-client")
+        .clientSecret("secret")
+        .clientAuthenticationMethod(ClientAuthenticationMethod.BASIC)
+        .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
+        .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
+        .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
+        .redirectUri("http://game-server:8030/login/oauth2/code/session-client-oidc")
+        .redirectUri("http://game-server:8030/authorized")
+        .scope(OidcScopes.OPENID)
+        .scope("expression.read")
+        .scope("expression.write")
+        .clientSettings(clientSettings -> clientSettings.requireUserConsent(true))
+        .build();
+		return new InMemoryRegisteredClientRepository(registeredClient);
 
     }
-    // @formatter:on
+   // @formatter:on
 
     @Bean
     public JWKSource<SecurityContext> jwkSource() {
